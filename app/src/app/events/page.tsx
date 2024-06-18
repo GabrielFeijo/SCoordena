@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Title from '@/components/title';
+import truncateText from '@/utils/truncate-text-';
 
 const events = [
 	{
@@ -66,14 +67,14 @@ const events = [
 
 export default function Page() {
 	return (
-		<div>
+		<div className='space-y-2'>
 			<Title>Events</Title>
 
-			<div className='flex flex-row flex-wrap gap-4'>
+			<div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
 				{events.map((event) => (
 					<div
 						key={event.id}
-						className='rounded-xl p-4 bg-secondary w-[30rem]'
+						className='rounded-xl p-4 bg-secondary w-full min-w-96'
 					>
 						<div className='flex space-y-2 justify-between'>
 							<div className='flex gap-2'>
@@ -85,7 +86,7 @@ export default function Page() {
 								<div className='w-full '>
 									<h2 className='text-xl font-semibold'>{event.name}</h2>
 									<p className='text-sm text-muted-foreground'>
-										{event.description}
+										{truncateText({ text: event.description, maxWords: 5 })}
 									</p>
 								</div>
 							</div>
