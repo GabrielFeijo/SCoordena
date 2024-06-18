@@ -26,7 +26,7 @@ export default function RootLayout({
 			lang='pt-BR'
 			className={Baloo_Bhai.variable}
 		>
-			<body className={inter.className}>
+			<body className={`${inter.className} h-screen antialiased `}>
 				<ThemeProvider
 					attribute='class'
 					defaultTheme='system'
