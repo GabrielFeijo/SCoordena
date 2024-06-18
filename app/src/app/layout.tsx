@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
-import { Inter, Baloo_Bhai_2 } from 'next/font/google';
+import { Poppins, Baloo_Bhai_2 } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/providers/theme-provider';
 
-const inter = Inter({ subsets: ['latin'] });
+const poppins = Poppins({
+	subsets: ['latin'],
+	weight: ['400', '500', '600', '700', '800', '900'],
+});
 export const metadata: Metadata = {
 	title: 'Senac Coordena',
 	description:
@@ -26,7 +29,7 @@ export default function RootLayout({
 			lang='pt-BR'
 			className={Baloo_Bhai.variable}
 		>
-			<body className={`${inter.className} h-screen antialiased `}>
+			<body className={`${poppins.className} antialiased `}>
 				<ThemeProvider
 					attribute='class'
 					defaultTheme='system'

@@ -11,8 +11,8 @@ const NavItem = ({ ...props }: NavItemProps) => {
 	return (
 		<Link
 			href='/'
-			className={`flex items-center gap-2 font-medium ${
-				activePath ? 'text-secondary' : 'text-muted-foreground'
+			className={`flex items-center  gap-2 font-medium ${
+				activePath ? 'text-primary' : 'text-muted-foreground'
 			}`}
 			{...props}
 		/>
