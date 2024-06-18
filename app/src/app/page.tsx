@@ -4,6 +4,7 @@ import { ModeToggle } from '@/components/mode-toogle';
 import CreateEvent from '@/components/dashboard/create-event';
 import AvatarComponent from '@/components/dashboard/avatar';
 import CalendarComponent from '@/components/dashboard/calendar-component';
+import Card from '@/components/dashboard/card';
 
 export default function Home() {
 	return (
@@ -28,10 +29,22 @@ export default function Home() {
 					</div>
 				</div>
 				<div className='grid grid-cols-1 lg:grid-cols-12 gap-4'>
-					<div className='lg:col-span-7 space-y-4 flex flex-col'>
-						<div>
-							<p>A calendar component</p>
+					<div className='lg:col-span-7 space-y-4'>
+						<div className='justify-between gap-4 flex flex-row'>
+							<Card
+								value={11}
+								description={'Hours Worked'}
+							/>
+							<Card
+								value={24}
+								description={'Money Paid'}
+							/>
+							<Card
+								value={36}
+								description={'Tasks Done'}
+							/>
 						</div>
+						<h2 className='text-2xl '>Your statistics</h2>
 					</div>
 					<div className='lg:col-span-5 space-y-4'>
 						<CalendarComponent />
