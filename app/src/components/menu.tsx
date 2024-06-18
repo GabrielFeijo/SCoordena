@@ -1,7 +1,6 @@
 import { LogOut } from 'lucide-react';
-import { Button } from '../ui/button';
-import NavBar from '../navigation/nav-bar';
-import { ModeToggle } from '../mode-toogle';
+import { Button } from './ui/button';
+import NavBar from './navigation/nav-bar';
 
 const Menu = () => {
 	return (

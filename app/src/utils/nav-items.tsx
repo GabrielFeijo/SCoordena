@@ -1,6 +1,6 @@
-import { BarChart, Home, Settings, Users } from 'lucide-react';
+import { BarChart, CalendarRange, Home, Settings, Users } from 'lucide-react';
 
-const navItems = [
+const userNavItems = [
 	{
 		href: '/',
 		icon: <Home className='size-5' />,
@@ -10,6 +10,19 @@ const navItems = [
 		href: '/statistics',
 		icon: <BarChart className='size-5' />,
 		label: 'Statistics',
+	},
+];
+
+const adminNavItems = [
+	{
+		href: '/',
+		icon: <Home className='size-5' />,
+		label: 'Dashboard',
+	},
+	{
+		href: '/events',
+		icon: <CalendarRange className='size-5' />,
+		label: 'Events',
 	},
 	{
 		href: '/team',
@@ -23,4 +36,4 @@ const navItems = [
 	},
 ];
 
-export default navItems;
+export { userNavItems, adminNavItems };

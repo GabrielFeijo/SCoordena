@@ -1,5 +1,4 @@
 'use client';
-import Menu from '@/components/dashboard/menu';
 import WelcomeBanner from '@/components/welcome-banner';
 import { ModeToggle } from '@/components/mode-toogle';
 import CreateEvent from '@/components/dashboard/create-event';
@@ -9,8 +8,6 @@ import Card from '@/components/dashboard/card';
 import {
 	Bar,
 	BarChart,
-	CartesianGrid,
-	Legend,
 	ResponsiveContainer,
 	Tooltip,
 	XAxis,
@@ -58,70 +55,65 @@ const data = [
 
 export default function Home() {
 	return (
-		<main className='m-4 space-x-4'>
-			<div className='fixed h-[calc(100vh-2rem)] top-4 left-4'>
-				<Menu />
-			</div>
-			<div className='space-y-4 w-[calc(100%-13rem)] !ml-auto'>
-				<div className='grid grid-cols-1 lg:grid-cols-12 gap-4'>
-					<div className='lg:col-span-7 space-y-4 flex flex-col'>
-						<WelcomeBanner />
-					</div>
-					<div className='lg:col-span-5 space-y-4'>
-						<div className='flex items-center space-x-4'>
-							<p className='w-full text-xl font-semibold'>
-								Here is your dashboard, Gabriel
-							</p>
-							<ModeToggle />
-							<AvatarComponent />
-						</div>
-						<CreateEvent />
-					</div>
+		<div className='space-y-4'>
+			<div className='grid grid-cols-1 lg:grid-cols-12 gap-4'>
+				<div className='lg:col-span-7 space-y-4 flex flex-col'>
+					<WelcomeBanner />
 				</div>
-				<div className='grid grid-cols-1 lg:grid-cols-12 gap-4'>
-					<div className='lg:col-span-7 space-y-4'>
-						<div className='justify-between gap-4 flex flex-row'>
-							<Card
-								value={11}
-								description={'Hours Worked'}
-							/>
-							<Card
-								value={24}
-								description={'Money Paid'}
-							/>
-							<Card
-								value={36}
-								description={'Tasks Done'}
-							/>
-						</div>
-						<h2 className='text-2xl '>Your statistics</h2>
-						<div className='bg-secondary rounded-xl p-4 h-[calc(100vh-21.5rem)]'>
-							<ResponsiveContainer
-								width='100%'
-								height='100%'
-							>
-								<BarChart data={data}>
-									<XAxis dataKey='name' />
-									<YAxis />
-									<Tooltip />
-									<Bar
-										dataKey='pv'
-										fill='#8884d8'
-									/>
-									<Bar
-										dataKey='uv'
-										fill='#82ca9d'
-									/>
-								</BarChart>
-							</ResponsiveContainer>
-						</div>
+				<div className='lg:col-span-5 space-y-4'>
+					<div className='flex items-center space-x-4'>
+						<p className='w-full text-xl font-semibold'>
+							Here is your dashboard, Gabriel
+						</p>
+						<ModeToggle />
+						<AvatarComponent />
 					</div>
-					<div className='lg:col-span-5 space-y-4'>
-						<CalendarComponent />
-						<LastEvents />
-					</div>
+					<CreateEvent />
 				</div>
 			</div>
-		</main>
+			<div className='grid grid-cols-1 lg:grid-cols-12 gap-4'>
+				<div className='lg:col-span-7 space-y-4'>
+					<div className='justify-between gap-4 flex flex-row'>
+						<Card
+							value={11}
+							description={'Hours Worked'}
+						/>
+						<Card
+							value={24}
+							description={'Money Paid'}
+						/>
+						<Card
+							value={36}
+							description={'Tasks Done'}
+						/>
+					</div>
+					<h2 className='text-2xl'>Your statistics</h2>
+					<div className='bg-secondary rounded-xl p-4 h-[calc(100vh-21.5rem)]'>
+						<ResponsiveContainer
+							width='100%'
+							height='100%'
+						>
+							<BarChart data={data}>
+								<XAxis dataKey='name' />
+								<YAxis />
+								<Tooltip />
+								<Bar
+									dataKey='pv'
+									fill='#8884d8'
+								/>
+								<Bar
+									dataKey='uv'
+									fill='#82ca9d'
+								/>
+							</BarChart>
+						</ResponsiveContainer>
+					</div>
+				</div>
+				<div className='lg:col-span-5 space-y-4'>
+					<CalendarComponent />
+					<LastEvents />
+				</div>
+			</div>
+		</div>
 	);
 }

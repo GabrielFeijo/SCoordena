@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Poppins, Baloo_Bhai_2 } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/providers/theme-provider';
+import Menu from '@/components/menu';
 
 const poppins = Poppins({
 	subsets: ['latin'],
@@ -36,7 +37,11 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					{children}
+					<div className='fixed h-[calc(100vh-2rem)] top-4 left-4 '>
+						<Menu />
+					</div>
+
+					<div className='m-4 w-[calc(100%-14.8rem)] ml-auto '>{children}</div>
 				</ThemeProvider>
 			</body>
 		</html>
