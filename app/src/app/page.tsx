@@ -62,7 +62,7 @@ export default function Home() {
 				</div>
 				<div className='lg:col-span-5 space-y-4'>
 					<div className='flex items-center space-x-4'>
-						<p className='w-full text-xl font-semibold'>
+						<p className='w-full xl:text-xl lg:text-base md:text-xs text-xs font-semibold'>
 							Here is your dashboard, Gabriel
 						</p>
 						<ModeToggle />
