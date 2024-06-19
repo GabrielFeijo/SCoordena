@@ -7,6 +7,7 @@ import { DayPicker } from 'react-day-picker';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { capitalizeText } from '@/utils/capitilize-text';
+import { parseISO } from 'date-fns';
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
@@ -20,7 +21,7 @@ function Calendar({
 	const [hoveredDate, setHoveredDate] = React.useState<Date | null>(null);
 
 	const eventsDay = Object.keys(events).map(
-		(dateString) => new Date(`${dateString} 00:00:00`)
+		(dateString) => new Date(dateString)
 	);
 
 	const eventsStyle = { border: '1px solid currentColor' };
@@ -35,12 +36,12 @@ function Calendar({
 
 	const renderTooltip = () => {
 		if (!hoveredDate) return null;
-		const dateString = hoveredDate.toISOString().split('T')[0];
-		const eventDetails = events[dateString];
+
+		const eventDetails = events[hoveredDate.toISOString()];
 		if (!eventDetails) return null;
 
 		return (
-			<div className='absolute bg-secondary p-4 shadow-lg border rounded-md z-20 w-full border-primary'>
+			<div className='bg-secondary p-4 shadow-lg border rounded-md z-20  border-primary'>
 				<h4 className='text-sm font-bold mb-2'>
 					{capitalizeText(
 						hoveredDate.toLocaleString('pt-BR', { dateStyle: 'full' })
@@ -57,7 +58,6 @@ function Calendar({
 
 	return (
 		<div className='relative'>
-			{renderTooltip()}
 			<DayPicker
 				modifiers={{ events: eventsDay }}
 				modifiersStyles={{ events: eventsStyle }}
@@ -84,7 +84,7 @@ function Calendar({
 					cell: 'h-9 w-full text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20 ',
 					day: cn(
 						buttonVariants({ variant: 'ghost' }),
-						'h-9 w-9 p-0 font-normal aria-selected:opacity-100'
+						'h-9 w-9 p-0 font-normal aria-selected:opacity-100 '
 					),
 					day_range_end: 'day-range-end',
 					day_selected:
@@ -106,6 +106,7 @@ function Calendar({
 				onDayMouseEnter={handleMouseEnter}
 				onDayMouseLeave={handleMouseLeave}
 			/>
+			{renderTooltip()}
 		</div>
 	);
 }

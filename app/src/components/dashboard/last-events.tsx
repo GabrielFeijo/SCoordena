@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { CalendarCheck } from 'lucide-react';
 import { getLastEvents } from '@/api/get-last-events';
+import { formatDistanceToNow } from 'date-fns';
 
 const LastEvents = () => {
 	const { data } = useQuery({
@@ -25,9 +26,8 @@ const LastEvents = () => {
 					>
 						<div>
 							<h4 className='font-medium '>{event.name}</h4>
-							{new Date(event.date).toString()}
 							<p className='text-sm text-muted-foreground'>
-								{event.date.toString()}
+								{formatDistanceToNow(event.date)}
 							</p>
 						</div>
 

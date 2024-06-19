@@ -1,18 +1,22 @@
+import { useQuery } from '@tanstack/react-query';
 import { Calendar } from '../ui/calendar';
+import { getEvents } from '@/api/get-events';
 
 const CalendarComponent = () => {
-	const events = {
-		'2024-06-03': ['Meeting with team', 'Project deadline'],
-		'2024-06-05': ['Client call', 'Code review'],
-		'2024-06-08': ['Workshop', 'Team building activity'],
-		'2024-06-11': ['Product launch', 'Follow-up meeting'],
-		'2024-06-14': ['One-on-one meeting', 'Weekly report submission'],
-		'2024-06-17': ['Strategy session', 'Budget review'],
-		'2024-06-20': ['Performance review', 'Company webinar'],
-		'2024-06-23': ['Team lunch', 'Hackathon'],
-		'2024-06-26': ['Conference call', 'Marketing campaign review'],
-		'2024-06-29': ['Client presentation', 'Development sprint planning'],
-	};
+	const { data } = useQuery({
+		queryKey: ['get-calendar-events'],
+		queryFn: getEvents,
+	});
+
+	const events: { [key: string]: string[] } = {};
+
+	data?.forEach((event) => {
+		const stringDate = event.date.toString();
+		if (!events[stringDate]) {
+			events[stringDate] = [];
+		}
+		events[stringDate].push(event.name);
+	});
 
 	return (
 		<div className='bg-secondary rounded-xl p-4 h-[23.7rem]'>

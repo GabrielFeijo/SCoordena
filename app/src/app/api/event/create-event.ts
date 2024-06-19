@@ -22,7 +22,7 @@ export const createEventHandler = async (req: NextRequest) => {
 		data: {
 			name: 'Event Name',
 			description: 'Event Description',
-			date: new Date('2022-06-01'),
+			date: new Date('2022-06-01 03:00:00'),
 			location: 'Event Location',
 			organizerId: session?.user.id as string,
 		},

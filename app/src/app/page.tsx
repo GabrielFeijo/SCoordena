@@ -1,8 +1,6 @@
 'use client';
 import WelcomeBanner from '@/components/welcome-banner';
-import { ModeToggle } from '@/components/mode-toogle';
 import CreateEvent from '@/components/dashboard/create-event';
-import AvatarComponent from '@/components/dashboard/avatar';
 import CalendarComponent from '@/components/dashboard/calendar-component';
 import Card from '@/components/dashboard/card';
 import {
