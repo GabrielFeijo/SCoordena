@@ -1,7 +1,7 @@
 import { api } from '@/lib/axios';
 import { Role } from '@prisma/client';
 
-export type GetEventsResponse = Array<{
+export type Event = {
 	id: string;
 	image?: string;
 	name: string;
@@ -9,10 +9,13 @@ export type GetEventsResponse = Array<{
 	date: Date;
 	location: string;
 	organizerId: string;
+	registrations?: Array<Registration>;
 	organizer: Organizer;
 	createdAt: Date;
 	updatedAt: Date;
-}>;
+};
+
+export type GetEventsResponse = Array<Event>;
 
 type Organizer = {
 	id: string;
@@ -20,6 +23,25 @@ type Organizer = {
 	email: string | null;
 	emailVerified: Date | null;
 	image: string | null;
+	role: Role;
+	createdAt: Date;
+	updatedAt: Date;
+};
+
+type Registration = {
+	id: string;
+	user: User;
+	userId: string;
+	createdAt: Date;
+	updatedAt: Date;
+};
+
+type User = {
+	id: string;
+	name?: string;
+	email?: string;
+	image?: string;
+	passwordHash: string;
 	role: Role;
 	createdAt: Date;
 	updatedAt: Date;

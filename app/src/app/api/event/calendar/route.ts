@@ -2,9 +2,9 @@ import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/prisma';
 
 import { getServerSession } from 'next-auth';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export const createEventHandler = async (req: NextRequest) => {
+export const fetchCalendarEvents = async () => {
 	try {
 		const session = await getServerSession(authOptions);
 
@@ -12,17 +12,18 @@ export const createEventHandler = async (req: NextRequest) => {
 			return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 		}
 
-		const event = await db.event.create({
-			data: {
-				name: 'Event Name',
-				description: 'Event Description',
-				date: new Date('2022-06-01 03:00:00'),
-				location: 'Event Location',
-				organizerId: session?.user.id as string,
+		const events = await db.event.findMany({
+			select: {
+				id: true,
+				name: true,
+				date: true,
+			},
+			orderBy: {
+				date: 'asc',
 			},
 		});
 
-		return NextResponse.json(event, { status: 201 });
+		return NextResponse.json(events, { status: 200 });
 	} catch (error) {
 		return NextResponse.json(
 			{ error: 'Internal Server Error' },
@@ -30,3 +31,5 @@ export const createEventHandler = async (req: NextRequest) => {
 		);
 	}
 };
+
+export { fetchCalendarEvents as GET };

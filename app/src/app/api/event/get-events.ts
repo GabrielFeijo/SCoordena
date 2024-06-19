@@ -5,26 +5,30 @@ import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 
 export const getEventsHandler = async () => {
-	const session = await getServerSession(authOptions);
+	try {
+		const session = await getServerSession(authOptions);
 
-	if (!session) {
-		return NextResponse.json(
-			{
-				error: 'Unauthorized',
+		if (!session) {
+			return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+		}
+		const data = await db.event.findMany({
+			include: {
+				registrations: {
+					include: {
+						user: true,
+					},
+				},
 			},
-			{
-				status: 401,
-			}
+			orderBy: {
+				date: 'asc',
+			},
+		});
+
+		return NextResponse.json(data, { status: 200 });
+	} catch (error) {
+		return NextResponse.json(
+			{ error: 'Internal Server Error' },
+			{ status: 500 }
 		);
 	}
-
-	const data = await db.event.findMany({
-		include: {
-			organizer: true,
-		},
-	});
-
-	return NextResponse.json(data, {
-		status: 200,
-	});
 };
