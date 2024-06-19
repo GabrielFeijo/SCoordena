@@ -1,10 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-const AvatarComponent = () => {
+const AvatarComponent = ({ imageUrl }: { imageUrl?: string | null }) => {
 	return (
 		<Avatar>
 			<AvatarImage
-				src='https://github.com/shadcn.png'
+				src={imageUrl || 'https://github.com/GabrielFeijo.png'}
 				alt='@shadcn'
 			/>
 			<AvatarFallback>CN</AvatarFallback>
