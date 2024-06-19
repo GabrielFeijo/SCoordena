@@ -1,3 +1,4 @@
+'use client';
 import { useSession } from 'next-auth/react';
 import { ModeToggle } from '../mode-toogle';
 import AvatarComponent from './avatar';

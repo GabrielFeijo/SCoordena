@@ -1,3 +1,4 @@
+'use client';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { CalendarCheck } from 'lucide-react';
@@ -22,7 +23,7 @@ const LastEvents = () => {
 					<Link
 						key={event.id}
 						className='rounded-xl bg-card p-4 my-2 flex  items-center justify-between'
-						href={`/events/${event.id}`}
+						href={`/event/${event.id}`}
 					>
 						<div>
 							<h4 className='font-medium '>{event.name}</h4>

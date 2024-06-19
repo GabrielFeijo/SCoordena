@@ -1,11 +1,12 @@
+'use client';
 import { useQuery } from '@tanstack/react-query';
 import { Calendar } from '../ui/calendar';
-import { getEvents } from '@/api/get-events';
+import { getCalendarEvents } from '@/api/get-calendar-events';
 
 const CalendarComponent = () => {
 	const { data } = useQuery({
 		queryKey: ['get-calendar-events'],
-		queryFn: getEvents,
+		queryFn: getCalendarEvents,
 	});
 
 	const events: { [key: string]: string[] } = {};
