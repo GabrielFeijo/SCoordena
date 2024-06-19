@@ -4,7 +4,7 @@ import { db } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 
-export const getEventsHandler = async () => {
+export const getUpcomingEvents = async () => {
 	const session = await getServerSession(authOptions);
 
 	if (!session) {
@@ -19,6 +19,11 @@ export const getEventsHandler = async () => {
 	}
 
 	const data = await db.event.findMany({
+		where: {
+			date: {
+				lte: new Date(),
+			},
+		},
 		include: {
 			organizer: true,
 		},
@@ -28,3 +33,5 @@ export const getEventsHandler = async () => {
 		status: 200,
 	});
 };
+
+export { getUpcomingEvents as GET };

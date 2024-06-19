@@ -75,7 +75,8 @@ model Event {
   id          String   @id @default(cuid())
   name        String
   description String?
-  date        DateTime @map("start_date")
+  image       String?
+  date        DateTime
   location    String
   organizerId String   @map("organizer_id")
   createdAt   DateTime @default(now()) @map("created_at")

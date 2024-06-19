@@ -4,6 +4,7 @@ import './globals.css';
 import { ThemeProvider } from '@/providers/theme-provider';
 import Menu from '@/components/menu';
 import AuthProvider from '@/providers/auth';
+import ReactQueryProvider from '@/providers/react-query-provider';
 
 const poppins = Poppins({
 	subsets: ['latin'],
@@ -33,20 +34,22 @@ export default function RootLayout({
 		>
 			<body className={`${poppins.className} antialiased mx-auto`}>
 				<AuthProvider>
-					<ThemeProvider
-						attribute='class'
-						defaultTheme='system'
-						enableSystem
-						disableTransitionOnChange
-					>
-						<div className='fixed h-[calc(100vh-2rem)] top-4 left-4 hidden md:block'>
-							<Menu />
-						</div>
+					<ReactQueryProvider>
+						<ThemeProvider
+							attribute='class'
+							defaultTheme='system'
+							enableSystem
+							disableTransitionOnChange
+						>
+							<div className='fixed h-[calc(100vh-2rem)] top-4 left-4 hidden md:block'>
+								<Menu />
+							</div>
 
-						<div className='m-4 md:w-[calc(100%-14.8rem)] ml-auto w-[calc(100%-2rem)] '>
-							{children}
-						</div>
-					</ThemeProvider>
+							<div className='m-4 md:w-[calc(100%-14.8rem)] ml-auto w-[calc(100%-2rem)] '>
+								{children}
+							</div>
+						</ThemeProvider>
+					</ReactQueryProvider>
 				</AuthProvider>
 			</body>
 		</html>

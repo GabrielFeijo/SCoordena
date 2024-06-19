@@ -60,3 +60,11 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+::-webkit-scrollbar {
+	width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #00000081;
+}
