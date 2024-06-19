@@ -8,14 +8,14 @@ const CalendarComponent = () => {
 		'2024-06-11': ['Product launch', 'Follow-up meeting'],
 		'2024-06-14': ['One-on-one meeting', 'Weekly report submission'],
 		'2024-06-17': ['Strategy session', 'Budget review'],
-		'2024-06-21': ['Performance review', 'Company webinar'],
+		'2024-06-20': ['Performance review', 'Company webinar'],
 		'2024-06-23': ['Team lunch', 'Hackathon'],
 		'2024-06-26': ['Conference call', 'Marketing campaign review'],
 		'2024-06-29': ['Client presentation', 'Development sprint planning'],
 	};
 
 	return (
-		<div className='bg-secondary rounded-xl p-4 '>
+		<div className='bg-secondary rounded-xl p-4 h-[23.7rem]'>
 			<Calendar
 				mode='single'
 				events={events}

@@ -31,7 +31,7 @@ export default function RootLayout({
 			lang='pt-BR'
 			className={Baloo_Bhai.variable}
 		>
-			<body className={`${poppins.className} antialiased `}>
+			<body className={`${poppins.className} antialiased mx-auto`}>
 				<AuthProvider>
 					<ThemeProvider
 						attribute='class'
@@ -39,11 +39,11 @@ export default function RootLayout({
 						enableSystem
 						disableTransitionOnChange
 					>
-						<div className='fixed h-[calc(100vh-2rem)] top-4 left-4 '>
+						<div className='fixed h-[calc(100vh-2rem)] top-4 left-4 hidden md:block'>
 							<Menu />
 						</div>
 
-						<div className='m-4 w-[calc(100%-14.8rem)] ml-auto '>
+						<div className='m-4 md:w-[calc(100%-14.8rem)] ml-auto w-[calc(100%-2rem)] '>
 							{children}
 						</div>
 					</ThemeProvider>
