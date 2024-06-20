@@ -1,14 +1,13 @@
-'use client';
-import { useSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
 
-const WelcomeBanner = () => {
-	const { data } = useSession();
+const WelcomeBanner = async () => {
+	const session = await getServerSession();
 
 	return (
 		<section className='flex justify-between items-center bg-secondary rounded-xl h-full w-full overflow-hidden p-1'>
 			<div className='px-9 py-9 lg:py-0'>
 				<h2 className='xl:text-4xl lg:text-3xl md:text-2xl text-xl whitespace-nowrap'>
-					Hello {data?.user?.name?.split(' ')[0] || 'Anonymous'}!
+					Hello {session?.user?.name?.split(' ')[0] || 'Anonymous'}!
 				</h2>
 				<p>It’s good to see you again.</p>
 			</div>
