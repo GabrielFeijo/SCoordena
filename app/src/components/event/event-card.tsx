@@ -36,7 +36,7 @@ const EventCard = ({ event }: { event: Event }) => {
 
 					<div className='flex justify-end items-end w-full relative'>
 						{event.registrations && event.registrations?.length > 0 ? (
-							event.registrations?.map((registration, i) => (
+							event.registrations.slice(0, 5).map((registration, i) => (
 								<img
 									src={
 										registration.user.image || 'https://via.placeholder.com/40'

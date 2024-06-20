@@ -15,7 +15,7 @@ const userNavItems = [
 
 const adminNavItems = [
 	{
-		href: '/',
+		href: '/dashboard',
 		icon: <Home className='size-5' />,
 		label: 'Dashboard',
 	},
