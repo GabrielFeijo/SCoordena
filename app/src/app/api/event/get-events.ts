@@ -15,7 +15,13 @@ export const getEventsHandler = async () => {
 			include: {
 				registrations: {
 					include: {
-						user: true,
+						user: {
+							select: {
+								id: true,
+								name: true,
+								image: true,
+							},
+						},
 					},
 				},
 			},

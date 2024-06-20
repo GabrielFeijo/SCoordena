@@ -39,12 +39,7 @@ type Registration = {
 type User = {
 	id: string;
 	name?: string;
-	email?: string;
 	image?: string;
-	passwordHash: string;
-	role: Role;
-	createdAt: Date;
-	updatedAt: Date;
 };
 
 export async function getEvents() {
