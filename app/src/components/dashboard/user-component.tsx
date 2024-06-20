@@ -9,7 +9,7 @@ const UserComponent = () => {
 	return (
 		<div className='flex items-center space-x-4'>
 			<p className='w-full xl:text-xl lg:text-base md:text-xs text-xs font-semibold !whitespace-nowrap'>
-				Here is your dashboard, {data?.user?.name?.split(' ')[0] || 'Anonymous'}
+				Here is your, {data?.user?.name?.split(' ')[0] || 'Anonymous'}
 			</p>
 			<ModeToggle />
 			<AvatarComponent imageUrl={data?.user?.image} />
