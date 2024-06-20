@@ -14,7 +14,7 @@ const LastEvents = () => {
 
 	return (
 		<div className='bg-secondary p-4 rounded-xl '>
-			<div className='h-[calc(100vh-38.5rem)] overflow-y-auto scroll-'>
+			<div className='h-[calc(100vh-38.3rem)] overflow-y-auto scroll-'>
 				<h3 className='text-lg font-semibold'>Last Events</h3>
 				<p className='text-sm text-muted-foreground'>
 					This is where you can see your last events
