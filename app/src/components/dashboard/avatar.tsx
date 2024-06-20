@@ -6,6 +6,7 @@ const AvatarComponent = ({ imageUrl }: { imageUrl?: string | null }) => {
 			<AvatarImage
 				src={imageUrl || 'https://github.com/GabrielFeijo.png'}
 				alt='@shadcn'
+				className='rounded-full'
 			/>
 			<AvatarFallback>CN</AvatarFallback>
 		</Avatar>

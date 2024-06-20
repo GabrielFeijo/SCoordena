@@ -1,5 +1,4 @@
 import { api } from '@/lib/axios';
-import { Role } from '@prisma/client';
 
 export type Event = {
 	id: string;
@@ -10,23 +9,11 @@ export type Event = {
 	location: string;
 	organizerId: string;
 	registrations?: Array<Registration>;
-	organizer: Organizer;
 	createdAt: Date;
 	updatedAt: Date;
 };
 
 export type GetEventsResponse = Array<Event>;
-
-type Organizer = {
-	id: string;
-	name: string | null;
-	email: string | null;
-	emailVerified: Date | null;
-	image: string | null;
-	role: Role;
-	createdAt: Date;
-	updatedAt: Date;
-};
 
 type Registration = {
 	id: string;
