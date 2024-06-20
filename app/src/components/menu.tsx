@@ -1,35 +1,28 @@
-'use client';
 import { LogIn, LogOut } from 'lucide-react';
 import { Button } from './ui/button';
 import NavBar from './navigation/nav-bar';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import MenuButton from './button';
 
-const Menu = () => {
-	const { data } = useSession();
+const Menu = async () => {
+	const session = await getServerSession();
 	return (
 		<section className='h-full flex flex-col w-fit bg-secondary p-8 rounded-3xl justify-between'>
 			<h1 className='font-baloo text-4xl font-bold'>SCoord.</h1>
 
 			<NavBar />
 
-			{data?.user ? (
-				<Button
-					className='flex gap-2 items-center justify-start bg-transparent text-primary'
-					onClick={() => signOut()}
-					variant={'outline'}
-				>
+			{session ? (
+				<MenuButton btnType='LogOut'>
 					<LogOut className='size-4' />
 					LogOut
-				</Button>
+				</MenuButton>
 			) : (
-				<Button
-					className='flex gap-2 items-center justify-start bg-transparent text-primary'
-					onClick={() => signIn('google')}
-					variant={'outline'}
-				>
+				<MenuButton btnType='LogIn'>
 					<LogIn className='size-4' />
 					LogIn
-				</Button>
+				</MenuButton>
 			)}
 		</section>
 	);
