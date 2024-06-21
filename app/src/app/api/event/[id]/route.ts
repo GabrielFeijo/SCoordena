@@ -37,6 +37,9 @@ const getEventByIdHandler = async (
 							},
 						},
 					},
+					orderBy: {
+						createdAt: 'desc',
+					},
 				},
 				feedbacks: {
 					select: {

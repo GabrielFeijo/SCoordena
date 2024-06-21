@@ -1,6 +1,7 @@
 'use client';
 import { getEventById } from '@/api/get-event-by-id';
 import EventAdminActions from '@/components/event/event-admin-actions';
+import EventUserActions from '@/components/event/event-user-actions';
 import FeedbackForm from '@/components/event/feedback-form';
 import FeedbackItem from '@/components/event/feedback-item';
 import ScheduleItem from '@/components/event/schedule-item';
@@ -11,8 +12,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { Clock9, MapPin, MessageSquare, Users } from 'lucide-react';
-import { useSession } from 'next-auth/react';
+import { Clock9, MapPin, MessageSquare, Shield, Users } from 'lucide-react';
 
 const Page = ({ params }: { params: { id: string } }) => {
 	const { data: event } = useQuery({
@@ -34,6 +34,10 @@ const Page = ({ params }: { params: { id: string } }) => {
 							</div>
 						</div>
 
+						<EventUserActions
+							id={params.id}
+							registrations={event.registrations}
+						/>
 						<EventAdminActions id={params.id} />
 
 						<div className='flex items-center justify-between mt-4'>
@@ -48,13 +52,26 @@ const Page = ({ params }: { params: { id: string } }) => {
 
 					<hr />
 
-					<Section
-						title='Location'
-						description='Here is the location of the event'
-						icon={<MapPin className='size-4 text-muted-foreground' />}
-					>
-						<p className='text-base font-medium'>{event?.location}</p>
-					</Section>
+					<div className='flex justify-between'>
+						<Section
+							title='Location'
+							description='Here is the location of the event'
+							icon={<MapPin className='size-4 text-muted-foreground' />}
+						>
+							<p className='text-base font-medium'>{event?.location}</p>
+						</Section>
+
+						<Section
+							title='Organizer'
+							description='Here is the organizer of the event'
+							icon={<Shield className='size-4 text-muted-foreground' />}
+							className='text-right ml-auto flex-row-reverse'
+						>
+							<p className='text-base font-medium text-right'>
+								{event?.organizer.name}
+							</p>
+						</Section>
+					</div>
 
 					<hr />
 

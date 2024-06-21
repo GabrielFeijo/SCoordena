@@ -1,16 +1,26 @@
+import { cn } from '@/lib/utils';
 import { ReactNode } from 'react';
 
 interface SectionProps {
 	icon: ReactNode;
 	title: string;
 	description?: string;
+	className?: string;
 	children: ReactNode;
 }
 
-const Section = ({ icon, title, description, children }: SectionProps) => {
+const Section = ({
+	icon,
+	title,
+	description,
+	className,
+	children,
+}: SectionProps) => {
 	return (
 		<div>
-			<h3 className='text-xl font-medium flex gap-1 items-center'>
+			<h3
+				className={cn('text-xl font-medium flex gap-1 items-center', className)}
+			>
 				{icon}
 				<span>{title}</span>
 			</h3>

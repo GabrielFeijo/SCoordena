@@ -1,5 +1,4 @@
 import { api } from '@/lib/axios';
-import { Role } from '@prisma/client';
 
 export type GetEventByIdResponse = Event;
 

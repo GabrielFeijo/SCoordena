@@ -1,11 +1,10 @@
 import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/prisma';
-import { Feedback } from '@prisma/client';
 
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
-const createFeedbackHandler = async (req: NextRequest) => {
+const registerUserToEvent = async (req: NextRequest) => {
 	try {
 		const session = await getServerSession(authOptions);
 
@@ -13,16 +12,11 @@ const createFeedbackHandler = async (req: NextRequest) => {
 			return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 		}
 
-		const data: Feedback = await req.json();
+		const data: { eventId: string; userId: string } = await req.json();
 
-		const feedback = await db.feedback.create({
+		const registration = await db.registration.create({
 			data,
 			select: {
-				id: true,
-				rating: true,
-				comment: true,
-				createdAt: true,
-				updatedAt: true,
 				user: {
 					select: {
 						id: true,
@@ -30,10 +24,12 @@ const createFeedbackHandler = async (req: NextRequest) => {
 						image: true,
 					},
 				},
+				createdAt: true,
+				updatedAt: true,
 			},
 		});
 
-		return NextResponse.json(feedback, { status: 201 });
+		return NextResponse.json(registration, { status: 201 });
 	} catch (error) {
 		return NextResponse.json(
 			{ error: 'Internal Server Error' },
@@ -42,4 +38,4 @@ const createFeedbackHandler = async (req: NextRequest) => {
 	}
 };
 
-export { createFeedbackHandler as POST };
+export { registerUserToEvent as POST };

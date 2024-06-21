@@ -6,8 +6,11 @@ import { Textarea } from '../ui/textarea';
 import { toast } from 'sonner';
 import { useSession } from 'next-auth/react';
 import { createFeedbackHandler } from '@/api/create-feedback';
+import { useQueryClient } from '@tanstack/react-query';
+import { Event } from '@/api/get-event-by-id';
 
 const FeedbackForm = ({ eventId }: { eventId: string }) => {
+	const queryClient = useQueryClient();
 	const { data: session } = useSession();
 
 	const [rating, setRating] = useState(0);
@@ -19,11 +22,20 @@ const FeedbackForm = ({ eventId }: { eventId: string }) => {
 			return toast.error('Invalid fields');
 		}
 
-		await createFeedbackHandler({
+		const response = await createFeedbackHandler({
 			eventId,
 			rating,
 			comment: data.comment as string,
 			userId: session?.user?.id as string,
+		});
+
+		queryClient.setQueryData(['get-event'], (oldData: Event) => {
+			const data = {
+				...oldData,
+				feedbacks: [response, ...oldData.feedbacks],
+			};
+
+			return data;
 		});
 	};
 
