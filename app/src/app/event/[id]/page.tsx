@@ -1,15 +1,18 @@
 'use client';
 import { getEventById } from '@/api/get-event-by-id';
 import EventAdminActions from '@/components/event/event-admin-actions';
+import FeedbackForm from '@/components/event/feedback-form';
 import FeedbackItem from '@/components/event/feedback-item';
 import ScheduleItem from '@/components/event/schedule-item';
 import Section from '@/components/event/section';
 import User from '@/components/event/user';
 import { ModeToggle } from '@/components/mode-toogle';
+import { Skeleton } from '@/components/ui/skeleton';
 
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { Clock9, MapPin, MessageSquare, Users } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 
 const Page = ({ params }: { params: { id: string } }) => {
 	const { data: event } = useQuery({
@@ -19,7 +22,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 
 	return (
 		<>
-			{event && (
+			{event ? (
 				<div className='space-y-4'>
 					<div>
 						<div
@@ -90,6 +93,8 @@ const Page = ({ params }: { params: { id: string } }) => {
 
 					<hr />
 
+					<FeedbackForm eventId={params.id} />
+
 					<Section
 						title='Feedbacks'
 						description='Here is a collection of feedback provided by the participants'
@@ -102,6 +107,28 @@ const Page = ({ params }: { params: { id: string } }) => {
 							/>
 						))}
 					</Section>
+				</div>
+			) : (
+				<div className='space-y-4'>
+					<Skeleton className='w-full h-[15rem]' />
+
+					<div className='space-y-2'>
+						<div className='flex justify-between'>
+							<Skeleton className='w-56 h-6' />
+							<Skeleton className='w-56 h-6' />
+						</div>
+						<Skeleton className='w-28 h-6' />
+					</div>
+
+					{Array.from({ length: 5 }).map((_, index) => (
+						<>
+							<hr />
+							<Skeleton
+								key={index}
+								className='w-full h-24'
+							/>
+						</>
+					))}
 				</div>
 			)}
 		</>

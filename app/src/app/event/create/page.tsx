@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useRef } from 'react';
 import { toast } from 'sonner';
 
 import { z } from 'zod';

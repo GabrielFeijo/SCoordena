@@ -53,6 +53,9 @@ const getEventByIdHandler = async (
 							},
 						},
 					},
+					orderBy: {
+						createdAt: 'desc',
+					},
 				},
 				schedule: {
 					select: {
