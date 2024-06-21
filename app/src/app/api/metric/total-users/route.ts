@@ -4,7 +4,7 @@ import { startOfMonth, subMonths } from 'date-fns';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 
-export const getTotalUsers = async () => {
+const getTotalUsers = async () => {
 	try {
 		const session = await getServerSession(authOptions);
 

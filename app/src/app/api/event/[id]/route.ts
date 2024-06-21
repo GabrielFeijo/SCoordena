@@ -4,7 +4,7 @@ import { db } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
-export const getEventByIdHandler = async (
+const getEventByIdHandler = async (
 	req: NextRequest,
 	{ params }: { params: { id: string } }
 ) => {
