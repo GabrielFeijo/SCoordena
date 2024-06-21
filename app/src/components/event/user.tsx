@@ -6,7 +6,10 @@ const User = ({ registration }: { registration: Registration }) => {
 	return (
 		<div className='flex items-center  p-2 bg-secondary rounded'>
 			<div className='flex items-center'>
-				<AvatarComponent imageUrl={registration.user.image} />
+				<AvatarComponent
+					imageUrl={registration.user.image}
+					size='size-8'
+				/>
 				<div className='ml-2'>
 					<p className='font-medium'>{registration.user.name}</p>
 					<p className='text-xs text-muted-foreground'>

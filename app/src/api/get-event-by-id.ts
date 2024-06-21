@@ -38,14 +38,16 @@ export type Registration = {
 	updatedAt: Date;
 };
 
-type Feedback = {
+export type Feedback = {
 	id: string;
 	rating: number;
 	comment: string | null;
 	user: User;
+	createdAt: Date;
+	updatedAt: Date;
 };
 
-type Schedule = {
+export type Schedule = {
 	id: string;
 	title: string;
 	description: string | null;

@@ -42,6 +42,8 @@ export const getEventByIdHandler = async (
 						id: true,
 						rating: true,
 						comment: true,
+						createdAt: true,
+						updatedAt: true,
 						user: {
 							select: {
 								id: true,
