@@ -11,7 +11,7 @@ import { ModeToggle } from '@/components/mode-toogle';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { useQuery } from '@tanstack/react-query';
-import { format } from 'date-fns';
+import { formatDate } from 'date-fns';
 import { Clock9, MapPin, MessageSquare, Shield, Users } from 'lucide-react';
 
 const Page = ({ params }: { params: { id: string } }) => {
@@ -42,7 +42,9 @@ const Page = ({ params }: { params: { id: string } }) => {
 
 						<div className='flex items-center justify-between mt-4'>
 							<h1 className='text-3xl font-medium'>{event?.name}</h1>
-							<h2 className='text-lg'>{format(event?.date, 'dd/MM/yyyy')}</h2>
+							<h2 className='text-lg'>
+								{formatDate(event?.date, 'dd/MM/yyyy')}
+							</h2>
 						</div>
 
 						<p className='text-lg text-muted-foreground'>

@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import { Pen, Trash } from 'lucide-react';
+import { CalendarCog, Pen, Trash } from 'lucide-react';
 import { deleteEventHandler } from '@/api/delete-event';
 import { useSession } from 'next-auth/react';
 import { Role } from '@prisma/client';
@@ -39,15 +39,26 @@ const EventAdminActions = ({ id }: { id: string }) => {
 
 	return (
 		<div className='flex items-center justify-between mt-4'>
-			<Button
-				variant='secondary'
-				asChild
-			>
-				<Link href={`/event/edit/${id}`}>
-					<Pen className='mr-2 size-4' />
-					Edit Event
-				</Link>
-			</Button>
+			<div className='space-x-2'>
+				<Button
+					variant='secondary'
+					asChild
+				>
+					<Link href={`/event/edit/${id}`}>
+						<Pen className='mr-2 size-4' />
+						Edit Event
+					</Link>
+				</Button>
+				<Button
+					variant='secondary'
+					asChild
+				>
+					<Link href={`/event/edit/${id}`}>
+						<CalendarCog className='mr-2 size-4' />
+						Edit Schedule
+					</Link>
+				</Button>
+			</div>
 			<Button
 				variant='destructive'
 				onClick={() => setOpen(true)}

@@ -1,4 +1,5 @@
 import {
+	CalendarCheck,
 	CalendarRange,
 	Home,
 	HomeIcon,
@@ -12,6 +13,11 @@ const userNavItems = [
 		href: '/',
 		icon: <Home className='size-5' />,
 		label: 'Home',
+	},
+	{
+		href: '/events/my-events',
+		icon: <CalendarCheck className='size-5' />,
+		label: 'My Events',
 	},
 	{
 		href: '/events',
