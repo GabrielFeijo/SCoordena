@@ -5,7 +5,7 @@ import { Feedback } from '@prisma/client';
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
-const createFeedbackHandler = async (req: NextRequest) => {
+const createFeedback = async (req: NextRequest) => {
 	try {
 		const session = await getServerSession(authOptions);
 
@@ -42,4 +42,4 @@ const createFeedbackHandler = async (req: NextRequest) => {
 	}
 };
 
-export { createFeedbackHandler as POST };
+export { createFeedback as POST };

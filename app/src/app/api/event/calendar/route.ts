@@ -4,7 +4,7 @@ import { db } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 
-const fetchCalendarEvents = async () => {
+const getCalendarEvents = async () => {
 	try {
 		const session = await getServerSession(authOptions);
 
@@ -32,4 +32,4 @@ const fetchCalendarEvents = async () => {
 	}
 };
 
-export { fetchCalendarEvents as GET };
+export { getCalendarEvents as GET };

@@ -5,7 +5,7 @@ import { Event } from '@prisma/client';
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
-const getEventByIdHandler = async (
+const getEventById = async (
 	req: NextRequest,
 	{ params }: { params: { id: string } }
 ) => {
@@ -84,7 +84,7 @@ const getEventByIdHandler = async (
 	}
 };
 
-const updateEventByIdHandler = async (
+const updateEventById = async (
 	req: NextRequest,
 	{ params }: { params: { id: string } }
 ) => {
@@ -115,7 +115,7 @@ const updateEventByIdHandler = async (
 	}
 };
 
-const deleteEventByIdHandler = async (
+const deleteEventById = async (
 	req: NextRequest,
 	{ params }: { params: { id: string } }
 ) => {
@@ -144,7 +144,7 @@ const deleteEventByIdHandler = async (
 };
 
 export {
-	getEventByIdHandler as GET,
-	updateEventByIdHandler as PATCH,
-	deleteEventByIdHandler as DELETE,
+	getEventById as GET,
+	updateEventById as PATCH,
+	deleteEventById as DELETE,
 };

@@ -5,7 +5,7 @@ import { Event } from '@prisma/client';
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
-const createEventHandler = async (req: NextRequest) => {
+const createEvent = async (req: NextRequest) => {
 	try {
 		const session = await getServerSession(authOptions);
 
@@ -26,7 +26,7 @@ const createEventHandler = async (req: NextRequest) => {
 	}
 };
 
-const getEventsHandler = async () => {
+const getEvents = async () => {
 	try {
 		const session = await getServerSession(authOptions);
 
@@ -61,4 +61,4 @@ const getEventsHandler = async () => {
 	}
 };
 
-export { createEventHandler as POST, getEventsHandler as GET };
+export { createEvent as POST, getEvents as GET };

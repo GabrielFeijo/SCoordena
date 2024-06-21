@@ -4,7 +4,7 @@ import { db } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
-const getUserEventsHandler = async (
+const getUserEvents = async (
 	req: NextRequest,
 	{ params }: { params: { id: string } }
 ) => {
@@ -52,4 +52,4 @@ const getUserEventsHandler = async (
 	}
 };
 
-export { getUserEventsHandler as GET };
+export { getUserEvents as GET };
