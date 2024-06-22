@@ -10,10 +10,11 @@ import {
 	Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
 
 import { ResponsiveContainer } from 'recharts';
 import { useTheme } from 'next-themes';
+import { useQuery } from '@tanstack/react-query';
+import { getEventsPerMonth } from '@/api/get-events-per-month';
 
 ChartJS.register(
 	CategoryScale,
@@ -24,36 +25,29 @@ ChartJS.register(
 	Legend
 );
 
-const labels = [
-	'January',
-	'February',
-	'March',
-	'April',
-	'May',
-	'June',
-	'July',
-	'August',
-	'September',
-	'October',
-	'November',
-	'December',
-];
-
-export const data = {
-	labels,
-	datasets: [
-		{
-			label: 'Number of Events',
-			data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-			backgroundColor: 'rgba(53, 162, 235, 0.5)',
-		},
-	],
-};
-
-const DataChart = () => {
+export const DataChart = () => {
 	const { theme } = useTheme();
 
 	const color = theme === 'dark' ? '#fff' : '#000';
+
+	const { data } = useQuery({
+		queryKey: ['get-events-per-month'],
+		queryFn: () => getEventsPerMonth(),
+	});
+
+	const months = data?.map((item) => item.month);
+	const eventsCount = data?.map((item) => item.eventCount);
+
+	const chartData = {
+		labels: months,
+		datasets: [
+			{
+				label: 'Number of Events',
+				data: eventsCount,
+				backgroundColor: 'rgba(53, 162, 235, 0.5)',
+			},
+		],
+	};
 
 	const options = {
 		responsive: true,
@@ -89,10 +83,14 @@ const DataChart = () => {
 			width='100%'
 			height='100%'
 		>
-			<Bar
-				options={options}
-				data={data}
-			/>
+			{data ? (
+				<Bar
+					options={options}
+					data={chartData}
+				/>
+			) : (
+				<></>
+			)}
 		</ResponsiveContainer>
 	);
 };
