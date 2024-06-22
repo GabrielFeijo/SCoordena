@@ -30,7 +30,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 	const { data: userData } = useSession();
 
 	const { data: eventData } = useQuery({
-		queryKey: ['get-event-by-id'],
+		queryKey: ['get-event-by-id', params.id],
 		queryFn: () => getEventById(params.id),
 	});
 

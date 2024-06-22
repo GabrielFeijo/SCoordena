@@ -16,7 +16,7 @@ import { Clock9, MapPin, MessageSquare, Shield, Users } from 'lucide-react';
 
 const Page = ({ params }: { params: { id: string } }) => {
 	const { data: event } = useQuery({
-		queryKey: ['get-event'],
+		queryKey: ['get-event', params.id],
 		queryFn: () => getEventById(params.id),
 	});
 
@@ -138,7 +138,10 @@ const Page = ({ params }: { params: { id: string } }) => {
 					</div>
 
 					{Array.from({ length: 5 }).map((_, index) => (
-						<div key={index}>
+						<div
+							key={index}
+							className='space-y-4'
+						>
 							<hr />
 							<Skeleton className='w-full h-24' />
 						</div>
