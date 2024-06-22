@@ -61,3 +61,55 @@ const getEventsPerMonth = async (req: NextRequest) => {
 };
 
 export { getEventsPerMonth as GET };
+
+/**
+ * @swagger
+ * /api/metric/events-per-month:
+ *   get:
+ *     summary: Get event counts per month
+ *     description: Retrieves the count of events for each month within a specified year.
+ *     tags:
+ *       - Metrics
+ *     parameters:
+ *       - in: query
+ *         name: year
+ *         schema:
+ *           type: integer
+ *         description: The year for which to retrieve event counts. Defaults to the current year if not provided.
+ *     responses:
+ *       200:
+ *         description: An array of objects containing the count of events for each month.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   month:
+ *                     type: string
+ *                     description: The name of the month.
+ *                   eventCount:
+ *                     type: integer
+ *                     description: The number of events in that month.
+ *       401:
+ *         description: Unauthorized. User session is not valid.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Unauthorized
+ *       500:
+ *         description: Internal Server Error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Internal Server Error
+ */

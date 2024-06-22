@@ -39,3 +39,74 @@ const registerUserToEvent = async (req: NextRequest) => {
 };
 
 export { registerUserToEvent as POST };
+
+/**
+ * @swagger
+ * /api/register:
+ *   post:
+ *     summary: Register user for an event
+ *     description: Registers a user for an event by creating a registration entry in the database.
+ *     tags:
+ *       - Registration
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               eventId:
+ *                 type: string
+ *                 description: ID of the event to register for.
+ *               userId:
+ *                 type: string
+ *                 description: ID of the user registering for the event.
+ *     responses:
+ *       201:
+ *         description: Registration successful. Returns the registration details.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                       description: ID of the registered user.
+ *                     name:
+ *                       type: string
+ *                       description: Name of the registered user.
+ *                     image:
+ *                       type: string
+ *                       description: URL of the registered user's image.
+ *                 createdAt:
+ *                   type: string
+ *                   format: date-time
+ *                   description: Date and time when the registration was created.
+ *                 updatedAt:
+ *                   type: string
+ *                   format: date-time
+ *                   description: Date and time when the registration was last updated.
+ *       401:
+ *         description: Unauthorized. User session is not valid.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Unauthorized
+ *       500:
+ *         description: Internal Server Error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Internal Server Error
+ */

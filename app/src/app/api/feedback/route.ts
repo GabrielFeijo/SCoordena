@@ -43,3 +43,46 @@ const createFeedback = async (req: NextRequest) => {
 };
 
 export { createFeedback as POST };
+
+/**
+ * @swagger
+ * /api/feedbacks:
+ *   post:
+ *     summary: Create new feedback
+ *     description: Creates a new feedback entry.
+ *     tags:
+ *       - Feedbacks
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/FeedbackInput'
+ *     responses:
+ *       201:
+ *         description: Feedback created successfully. Returns the created feedback object.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Feedback'
+ *       401:
+ *         description: Unauthorized. User session is not valid.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Unauthorized
+ *       500:
+ *         description: Internal Server Error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Internal Server Error
+ */
