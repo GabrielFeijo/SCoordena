@@ -15,6 +15,7 @@ import { ResponsiveContainer } from 'recharts';
 import { useTheme } from 'next-themes';
 import { useQuery } from '@tanstack/react-query';
 import { getEventsPerMonth } from '@/api/get-events-per-month';
+import { Skeleton } from '../ui/skeleton';
 
 ChartJS.register(
 	CategoryScale,
@@ -79,19 +80,32 @@ export const DataChart = () => {
 	};
 
 	return (
-		<ResponsiveContainer
-			width='100%'
-			height='100%'
-		>
+		<>
 			{data ? (
-				<Bar
-					options={options}
-					data={chartData}
-				/>
+				<ResponsiveContainer
+					width='100%'
+					height='100%'
+				>
+					<Bar
+						options={options}
+						data={chartData}
+					/>
+				</ResponsiveContainer>
 			) : (
-				<></>
+				<div className='w-full h-full gap-2 flex flex-col'>
+					<Skeleton className='w-40 h-5 bg-card m-auto' />
+					<Skeleton className='w-60 h-5 bg-card m-auto' />
+					<div className='flex flex-1 flex-row gap-2'>
+						{Array.from({ length: 5 }).map((_, i) => (
+							<Skeleton
+								className='h-full w-full rounded bg-card'
+								key={i}
+							/>
+						))}
+					</div>
+				</div>
 			)}
-		</ResponsiveContainer>
+		</>
 	);
 };
 

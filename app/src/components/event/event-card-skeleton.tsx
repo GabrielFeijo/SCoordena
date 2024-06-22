@@ -10,10 +10,10 @@ const EventCardSkeleton = () => {
 						key={i}
 					>
 						<div className='flex gap-2'>
-							<Skeleton className='h-full size-40 animate-pulse rounded bg-card' />
+							<Skeleton className='h-full size-40 rounded bg-card' />
 							<div className='space-y-1'>
-								<Skeleton className='h-5 w-52 animate-pulse rounded bg-card' />
-								<Skeleton className='h-4 w-40 animate-pulse rounded bg-card' />
+								<Skeleton className='h-5 w-52 rounded bg-card' />
+								<Skeleton className='h-4 w-40 rounded bg-card' />
 							</div>
 						</div>
 
