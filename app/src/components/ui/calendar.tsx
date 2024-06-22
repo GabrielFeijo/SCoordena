@@ -21,7 +21,7 @@ function Calendar({
 	const [hoveredDate, setHoveredDate] = React.useState<Date | null>(null);
 
 	const eventsDay = Object.keys(events).map(
-		(dateString) => new Date(dateString)
+		(dateString) => new Date(dateString + 'T00:00:00')
 	);
 
 	const eventsStyle = { border: '1px solid currentColor' };
@@ -37,7 +37,8 @@ function Calendar({
 	const renderTooltip = () => {
 		if (!hoveredDate) return null;
 
-		const eventDetails = events[hoveredDate.toISOString()];
+		const eventDetails = events[hoveredDate.toISOString().split('T')[0]];
+
 		if (!eventDetails) return null;
 
 		return (

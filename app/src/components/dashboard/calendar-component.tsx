@@ -12,7 +12,7 @@ const CalendarComponent = () => {
 	const events: { [key: string]: string[] } = {};
 
 	data?.forEach((event) => {
-		const stringDate = event.date.toString();
+		const stringDate = event.date.toString().split('T')[0];
 		if (!events[stringDate]) {
 			events[stringDate] = [];
 		}
