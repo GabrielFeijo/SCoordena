@@ -77,7 +77,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 							id='name'
 							name='name'
 							placeholder='Chess Tournament'
-							defaultValue={eventData?.name}
+							defaultValue={eventData.name}
 						/>
 					</FormField>
 
@@ -91,7 +91,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 							id='image'
 							name='image'
 							placeholder='https://via.placeholder.com/150'
-							defaultValue={eventData?.image}
+							defaultValue={eventData.image}
 						/>
 					</FormField>
 
@@ -105,7 +105,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 							placeholder='Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nesciunt ex, totam provident officiis adipisci suscipit consectetur repellat officia magnam dolorum consequatur placeat enim deleniti cumque, soluta, praesentium dolorem vel!'
 							rows={5}
 							className='resize-none'
-							defaultValue={eventData?.description}
+							defaultValue={eventData.description}
 						/>
 					</FormField>
 
@@ -118,7 +118,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 							type='text'
 							name='location'
 							placeholder='Seattle, WA'
-							defaultValue={eventData?.location}
+							defaultValue={eventData.location}
 						/>
 					</FormField>
 
@@ -131,7 +131,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 							type='date'
 							name='date'
 							placeholder='2022-01-01'
-							defaultValue={formatDate(eventData?.date as Date, 'yyyy-MM-dd')}
+							defaultValue={formatDate(eventData.date, 'yyyy-MM-dd')}
 						/>
 					</FormField>
 				</div>

@@ -11,10 +11,10 @@ export default function Page() {
 	const { data: session } = useSession();
 
 	const { data } = useQuery({
-		queryKey: ['get-event'],
+		queryKey: ['get-user-events'],
 		queryFn: async () => {
 			if (session?.user.id) {
-				return await getUserEvents({
+				return getUserEvents({
 					userId: session.user.id as string,
 				});
 			}

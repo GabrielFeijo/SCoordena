@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Event } from '@/api/get-events';
 import truncateText from '@/utils/truncate-text-';
+import { formatDate } from 'date-fns';
 import Link from 'next/link';
 
 const EventCard = ({ event }: { event: Event }) => {
@@ -13,9 +14,7 @@ const EventCard = ({ event }: { event: Event }) => {
 				<div className='flex gap-2'>
 					<div
 						style={{
-							backgroundImage: `url(${
-								event.image || 'https://via.placeholder.com/100'
-							})`,
+							backgroundImage: `url(${event.image})`,
 						}}
 						className=' min-w-36 min-h-36 rounded bg-cover bg-center bg-no-repeat'
 					/>
@@ -31,16 +30,14 @@ const EventCard = ({ event }: { event: Event }) => {
 				</div>
 				<div className='text-sm flex flex-col justify-between'>
 					<p className='text-right'>
-						{new Date(event.date).toLocaleDateString()}
+						{formatDate(new Date(event.date), 'dd/MM/yyyy')}
 					</p>
 
 					<div className='flex justify-end items-end w-full relative'>
 						{event.registrations && event.registrations?.length > 0 ? (
 							event.registrations.slice(0, 5).map((registration, i) => (
 								<img
-									src={
-										registration.user.image || 'https://via.placeholder.com/40'
-									}
+									src={registration.user.image}
 									alt={registration.user.name}
 									key={registration.id}
 									className={`rounded-full size-10 border-2 border-primary absolute`}

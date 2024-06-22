@@ -26,7 +26,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 				<div className='space-y-4'>
 					<div>
 						<div
-							style={{ backgroundImage: `url(${event?.image})` }}
+							style={{ backgroundImage: `url(${event.image})` }}
 							className='h-[15rem] w-full bg-cover bg-center rounded-xl relative'
 						>
 							<div className='absolute top-4 right-4 border border-primary rounded'>
@@ -41,15 +41,13 @@ const Page = ({ params }: { params: { id: string } }) => {
 						<EventAdminActions id={params.id} />
 
 						<div className='flex items-center justify-between mt-4'>
-							<h1 className='text-3xl font-medium'>{event?.name}</h1>
+							<h1 className='text-3xl font-medium'>{event.name}</h1>
 							<h2 className='text-lg'>
-								{formatDate(event?.date, 'dd/MM/yyyy')}
+								{formatDate(new Date(event.date), 'dd/MM/yyyy')}
 							</h2>
 						</div>
 
-						<p className='text-lg text-muted-foreground'>
-							{event?.description}
-						</p>
+						<p className='text-lg text-muted-foreground'>{event.description}</p>
 					</div>
 
 					<hr />
@@ -60,7 +58,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 							description='Here is the location of the event'
 							icon={<MapPin className='size-4 text-muted-foreground' />}
 						>
-							<p className='text-base font-medium'>{event?.location}</p>
+							<p className='text-base font-medium'>{event.location}</p>
 						</Section>
 
 						<Section
@@ -70,7 +68,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 							className='text-right ml-auto flex-row-reverse'
 						>
 							<p className='text-base font-medium text-right'>
-								{event?.organizer.name}
+								{event.organizer.name}
 							</p>
 						</Section>
 					</div>
@@ -84,7 +82,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 						icon={<Clock9 className='size-4 text-muted-foreground' />}
 					>
 						<div className='grid grid-cols-1 lg:grid-cols-5 gap-2 my-2'>
-							{event?.schedule.map((item) => (
+							{event.schedule.map((item) => (
 								<ScheduleItem
 									key={item.id}
 									{...item}
@@ -101,7 +99,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 						icon={<Users className='size-4 text-muted-foreground' />}
 					>
 						<div className='grid grid-cols-1 lg:grid-cols-5 gap-2 my-2'>
-							{event?.registrations.map((registration) => (
+							{event.registrations.map((registration) => (
 								<User
 									registration={registration}
 									key={registration.id}
@@ -119,7 +117,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 						description='Here is a collection of feedback provided by the participants'
 						icon={<MessageSquare className='size-4 text-muted-foreground' />}
 					>
-						{event?.feedbacks.map((feedback) => (
+						{event.feedbacks.map((feedback) => (
 							<FeedbackItem
 								key={feedback.id}
 								{...feedback}
@@ -140,13 +138,10 @@ const Page = ({ params }: { params: { id: string } }) => {
 					</div>
 
 					{Array.from({ length: 5 }).map((_, index) => (
-						<>
+						<div key={index}>
 							<hr />
-							<Skeleton
-								key={index}
-								className='w-full h-24'
-							/>
-						</>
+							<Skeleton className='w-full h-24' />
+						</div>
 					))}
 				</div>
 			)}
