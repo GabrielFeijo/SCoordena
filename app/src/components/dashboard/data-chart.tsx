@@ -1,70 +1,98 @@
 'use client';
+import React from 'react';
 import {
-	BarChart,
-	ResponsiveContainer,
-	XAxis,
-	YAxis,
+	Chart as ChartJS,
+	CategoryScale,
+	LinearScale,
+	BarElement,
+	Title,
 	Tooltip,
-	Bar,
-} from 'recharts';
+	Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import { faker } from '@faker-js/faker';
 
-const data = [
-	{
-		name: 'Page A',
-		uv: 4000,
-		pv: 2400,
-	},
-	{
-		name: 'Page B',
-		uv: 3000,
-		pv: 1398,
-	},
-	{
-		name: 'Page C',
-		uv: 2000,
-		pv: 3800,
-	},
-	{
-		name: 'Page D',
-		uv: 2780,
-		pv: 3908,
-	},
-	{
-		name: 'Page E',
-		uv: 1890,
-		pv: 4800,
-	},
-	{
-		name: 'Page F',
-		uv: 2390,
-		pv: 3800,
-	},
-	{
-		name: 'Page G',
-		uv: 3490,
-		pv: 4300,
-	},
+import { ResponsiveContainer } from 'recharts';
+import { useTheme } from 'next-themes';
+
+ChartJS.register(
+	CategoryScale,
+	LinearScale,
+	BarElement,
+	Title,
+	Tooltip,
+	Legend
+);
+
+const labels = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December',
 ];
 
+export const data = {
+	labels,
+	datasets: [
+		{
+			label: 'Number of Events',
+			data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+			backgroundColor: 'rgba(53, 162, 235, 0.5)',
+		},
+	],
+};
+
 const DataChart = () => {
+	const { theme } = useTheme();
+
+	const color = theme === 'dark' ? '#fff' : '#000';
+
+	const options = {
+		responsive: true,
+		plugins: {
+			legend: {
+				position: 'top' as const,
+				labels: {
+					color,
+				},
+			},
+			title: {
+				display: true,
+				text: 'Events per month',
+				color,
+			},
+		},
+		scales: {
+			x: {
+				ticks: {
+					color,
+				},
+			},
+			y: {
+				ticks: {
+					color,
+				},
+			},
+		},
+	};
+
 	return (
 		<ResponsiveContainer
 			width='100%'
 			height='100%'
 		>
-			<BarChart data={data}>
-				<XAxis dataKey='name' />
-				<YAxis />
-				<Tooltip />
-				<Bar
-					dataKey='pv'
-					fill='#8884d8'
-				/>
-				<Bar
-					dataKey='uv'
-					fill='#82ca9d'
-				/>
-			</BarChart>
+			<Bar
+				options={options}
+				data={data}
+			/>
 		</ResponsiveContainer>
 	);
 };

@@ -10,7 +10,7 @@ async function main() {
 	for (let i = 0; i < 5; i++) {
 		users.push({
 			id: cuid(),
-			name: faker.name.fullName(),
+			name: faker.person.fullName(),
 			email: faker.internet.email(),
 			emailVerified: faker.date.past(),
 			image: faker.image.avatarLegacy(),
@@ -29,7 +29,7 @@ async function main() {
 			description: faker.lorem.sentence(),
 			image: faker.image.url(),
 			date: faker.date.future(),
-			location: faker.address.city(),
+			location: faker.location.streetAddress(),
 			organizerId: users[i % users.length].id, // Assigning organizerId from created users
 		});
 	}
@@ -70,7 +70,7 @@ async function main() {
 		feedbacks.push({
 			eventId: events[i % events.length].id,
 			userId: users[i % users.length].id,
-			rating: faker.datatype.number({ min: 1, max: 5 }),
+			rating: faker.number.int({ min: 1, max: 5 }),
 			comment: faker.lorem.sentence(),
 		});
 	}
