@@ -18,13 +18,6 @@ export const getApiDocs = async () => {
 					url: 'https://opensource.org/licenses/MIT',
 				},
 			},
-			servers: [
-				{
-					url: 'http://localhost:3000', // URL base da sua API
-					description: 'Development server',
-				},
-				// Adicione mais servers conforme necessário (produção, staging, etc.)
-			],
 		},
 	});
 
