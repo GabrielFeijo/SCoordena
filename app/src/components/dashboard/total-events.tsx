@@ -5,7 +5,7 @@ import { Loader2, Ticket, Users } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { CardSkeleton } from './card-skeleton';
-import { getTotalEvents } from '@/api/get-total-events';
+import { getTotalEvents } from '@/api/metric/get-total-events';
 
 export function TotalEvents() {
 	const { data, isFetching: isLoading } = useQuery({

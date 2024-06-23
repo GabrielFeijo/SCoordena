@@ -1,5 +1,5 @@
 'use client';
-import { createEventHandler } from '@/api/create-event';
+import { createEventHandler } from '@/api/event/create-event';
 import FormField from '@/components/event/form-field';
 import Title from '@/components/title';
 import { Button } from '@/components/ui/button';

@@ -16,8 +16,8 @@ import { z } from 'zod';
 import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
 import { formatDate } from 'date-fns';
-import { Event } from '@/api/get-event-by-id';
-import { updateEvent } from '@/api/update-event';
+import { Event } from '@/api/event/get-event-by-id';
+import { updateEvent } from '@/api/event/update-event';
 
 const schema = z.object({
 	name: z.string().min(1, { message: 'Name is required' }),

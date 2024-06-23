@@ -1,4 +1,4 @@
-import { Feedback } from '@/api/get-event-by-id';
+import { Feedback } from '@/api/event/get-event-by-id';
 import { formatDate } from 'date-fns';
 import { Star } from 'lucide-react';
 import React from 'react';

@@ -5,7 +5,7 @@ import { Loader2, MessageSquareText } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { CardSkeleton } from './card-skeleton';
-import { getTotalFeedbacks } from '@/api/get-total-feedbacks';
+import { getTotalFeedbacks } from '@/api/metric/get-total-feedbacks';
 
 export function TotalFeedbacks() {
 	const { data, isFetching: isLoading } = useQuery({

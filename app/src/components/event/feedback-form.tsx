@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { Textarea } from '../ui/textarea';
 import { toast } from 'sonner';
 import { useSession } from 'next-auth/react';
-import { createFeedbackHandler } from '@/api/create-feedback';
+import { createFeedbackHandler } from '@/api/feedback/create-feedback';
 import { useQueryClient } from '@tanstack/react-query';
-import { Event } from '@/api/get-event-by-id';
+import { Event } from '@/api/event/get-event-by-id';
 
 const FeedbackForm = ({ eventId }: { eventId: string }) => {
 	const queryClient = useQueryClient();

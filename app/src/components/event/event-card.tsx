@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Event } from '@/api/get-events';
+import { Event } from '@/api/event/get-events';
 import truncateText from '@/utils/truncate-text-';
 import { formatDate } from 'date-fns';
 import Link from 'next/link';

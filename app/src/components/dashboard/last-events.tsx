@@ -2,7 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { CalendarCheck } from 'lucide-react';
-import { getLastEvents } from '@/api/get-last-events';
+import { getLastEvents } from '@/api/metric/get-last-events';
 import { formatDistanceToNow } from 'date-fns';
 import { Skeleton } from '../ui/skeleton';
 

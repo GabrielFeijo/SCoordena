@@ -15,8 +15,8 @@ import { Check, Ticket, TicketCheck } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { Role } from '@prisma/client';
 import { useQueryClient } from '@tanstack/react-query';
-import { Event, Registration } from '@/api/get-event-by-id';
-import { registerToEventHandler } from '@/api/register-to-event';
+import { Event, Registration } from '@/api/event/get-event-by-id';
+import { registerToEventHandler } from '@/api/registration/register-to-event';
 import Link from 'next/link';
 
 const EventUserActions = ({

@@ -1,4 +1,4 @@
-import { Schedule } from '@/api/get-event-schedule';
+import { Schedule } from '@/api/event/get-event-schedule';
 
 interface ScheduleItemProps extends Schedule {}
 

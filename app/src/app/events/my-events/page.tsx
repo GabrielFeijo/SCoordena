@@ -1,6 +1,5 @@
 'use client';
-import { getEvents } from '@/api/get-events';
-import { getUserEvents } from '@/api/get-user-events';
+import { getUserEvents } from '@/api/event/get-user-events';
 import EventCard from '@/components/event/event-card';
 import EventCardSkeleton from '@/components/event/event-card-skeleton';
 import Title from '@/components/title';

@@ -1,7 +1,7 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
 import { Calendar } from '../ui/calendar';
-import { getCalendarEvents } from '@/api/get-calendar-events';
+import { getCalendarEvents } from '@/api/event/get-calendar-events';
 
 const CalendarComponent = () => {
 	const { data } = useQuery({

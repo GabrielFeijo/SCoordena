@@ -1,7 +1,7 @@
 'use client';
-import { deleteScheduleItemById } from '@/api/delete-schedule-item';
-import { Event } from '@/api/get-event-by-id';
-import { getEventSchedule } from '@/api/get-event-schedule';
+import { deleteScheduleItemById } from '@/api/schedule/delete-schedule-item';
+import { Event } from '@/api/event/get-event-by-id';
+import { getEventSchedule } from '@/api/event/get-event-schedule';
 import Section from '@/components/event/section';
 import { CardWithForm } from '@/components/schedule/card-w-form';
 import Title from '@/components/title';
@@ -19,7 +19,6 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Clock9, Pencil, Plus, Trash } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 

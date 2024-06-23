@@ -14,7 +14,7 @@ import { Bar } from 'react-chartjs-2';
 import { ResponsiveContainer } from 'recharts';
 import { useTheme } from 'next-themes';
 import { useQuery } from '@tanstack/react-query';
-import { getEventsPerMonth } from '@/api/get-events-per-month';
+import { getEventsPerMonth } from '@/api/metric/get-events-per-month';
 import { Skeleton } from '../ui/skeleton';
 
 ChartJS.register(

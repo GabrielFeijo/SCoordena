@@ -1,5 +1,5 @@
 'use client';
-import { getEventById } from '@/api/get-event-by-id';
+import { getEventById } from '@/api/event/get-event-by-id';
 import { EditEventForm } from '@/components/event/edit-event-form';
 import EventAdminActions from '@/components/event/event-admin-actions';
 import EventUserActions from '@/components/event/event-user-actions';

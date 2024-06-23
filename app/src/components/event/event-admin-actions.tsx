@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 import { CalendarCog, Pen, Trash } from 'lucide-react';
-import { deleteEventHandler } from '@/api/delete-event';
+import { deleteEventHandler } from '@/api/event/delete-event';
 import { useSession } from 'next-auth/react';
 import { Role } from '@prisma/client';
 

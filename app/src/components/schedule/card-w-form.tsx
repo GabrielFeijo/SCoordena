@@ -12,13 +12,13 @@ import {
 import { Input } from '@/components/ui/input';
 import FormField from '../event/form-field';
 import { Textarea } from '../ui/textarea';
-import { Event, Schedule } from '@/api/get-event-schedule';
+import { Event, Schedule } from '@/api/event/get-event-schedule';
 
 import { z } from 'zod';
 import { toast } from 'sonner';
-import { updateScheduleItemById } from '@/api/update-schedule-item';
+import { updateScheduleItemById } from '@/api/schedule/update-schedule-item';
 import { useQueryClient } from '@tanstack/react-query';
-import { createScheduleItem } from '@/api/create-schedule-item';
+import { createScheduleItem } from '@/api/schedule/create-schedule-item';
 
 const formSchema = z.object({
 	title: z.string().min(1, 'Event name is required'),

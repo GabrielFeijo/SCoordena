@@ -1,4 +1,4 @@
-import { Registration } from '@/api/get-event-by-id';
+import { Registration } from '@/api/event/get-event-by-id';
 import AvatarComponent from '../dashboard/avatar';
 import { format } from 'date-fns';
 

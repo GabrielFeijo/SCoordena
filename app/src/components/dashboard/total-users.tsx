@@ -5,7 +5,7 @@ import { Loader2, Users } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { CardSkeleton } from './card-skeleton';
-import { getTotalUsers } from '@/api/get-total-users';
+import { getTotalUsers } from '@/api/metric/get-total-users';
 
 export function TotalUsers() {
 	const { data, isFetching: isLoading } = useQuery({
