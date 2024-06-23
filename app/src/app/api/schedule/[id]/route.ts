@@ -20,6 +20,13 @@ const updateScheduleItemById = async (
 		const data: Schedule = await req.json();
 
 		const scheduleItem = await db.schedule.update({
+			select: {
+				id: true,
+				title: true,
+				description: true,
+				startTime: true,
+				endTime: true,
+			},
 			where: {
 				id,
 			},

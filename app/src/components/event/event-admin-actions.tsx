@@ -19,7 +19,13 @@ import { deleteEventHandler } from '@/api/delete-event';
 import { useSession } from 'next-auth/react';
 import { Role } from '@prisma/client';
 
-const EventAdminActions = ({ id }: { id: string }) => {
+const EventAdminActions = ({
+	id,
+	setEventIdToEdit,
+}: {
+	id: string;
+	setEventIdToEdit: React.Dispatch<React.SetStateAction<string | undefined>>;
+}) => {
 	const { data } = useSession();
 
 	const router = useRouter();
@@ -42,13 +48,12 @@ const EventAdminActions = ({ id }: { id: string }) => {
 			<div className='space-x-2'>
 				<Button
 					variant='secondary'
-					asChild
+					onClick={() => setEventIdToEdit(id)}
 				>
-					<Link href={`/event/edit/${id}`}>
-						<Pen className='mr-2 size-4' />
-						Edit Event
-					</Link>
+					<Pen className='mr-2 size-4' />
+					Edit Event
 				</Button>
+
 				<Button
 					variant='secondary'
 					asChild

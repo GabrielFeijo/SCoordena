@@ -1,5 +1,6 @@
 'use client';
 import { getEventById } from '@/api/get-event-by-id';
+import { EditEventForm } from '@/components/event/edit-event-form';
 import EventAdminActions from '@/components/event/event-admin-actions';
 import EventUserActions from '@/components/event/event-user-actions';
 import FeedbackForm from '@/components/event/feedback-form';
@@ -13,8 +14,11 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useQuery } from '@tanstack/react-query';
 import { formatDate } from 'date-fns';
 import { Clock9, MapPin, MessageSquare, Shield, Users } from 'lucide-react';
+import { useState } from 'react';
 
 const Page = ({ params }: { params: { id: string } }) => {
+	const [eventIdToEdit, setEventIdToEdit] = useState<string>();
+
 	const { data: event } = useQuery({
 		queryKey: ['get-event', params.id],
 		queryFn: () => getEventById(params.id),
@@ -22,6 +26,13 @@ const Page = ({ params }: { params: { id: string } }) => {
 
 	return (
 		<>
+			{eventIdToEdit && event && (
+				<EditEventForm
+					eventId={params.id}
+					setEventIdToEdit={setEventIdToEdit}
+					defaultValues={event}
+				/>
+			)}
 			{event ? (
 				<div className='space-y-4'>
 					<div>
@@ -38,7 +49,10 @@ const Page = ({ params }: { params: { id: string } }) => {
 							id={params.id}
 							registrations={event.registrations}
 						/>
-						<EventAdminActions id={params.id} />
+						<EventAdminActions
+							id={params.id}
+							setEventIdToEdit={setEventIdToEdit}
+						/>
 
 						<div className='flex items-center justify-between mt-4'>
 							<h1 className='text-3xl font-medium'>{event.name}</h1>

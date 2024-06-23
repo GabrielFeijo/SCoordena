@@ -18,6 +18,7 @@ import { z } from 'zod';
 import { toast } from 'sonner';
 import { updateScheduleItemById } from '@/api/update-schedule-item';
 import { useQueryClient } from '@tanstack/react-query';
+import { createScheduleItem } from '@/api/create-schedule-item';
 
 const formSchema = z.object({
 	title: z.string().min(1, 'Event name is required'),
@@ -49,116 +50,131 @@ export function CardWithForm({
 			};
 		}
 
-		if (!defaultValues?.id) {
-			return;
+		if (!defaultValues) {
+			const response = await createScheduleItem({
+				eventId,
+				...validatedFields.data,
+			});
+
+			queryClient.setQueryData(
+				['get-event-schedule-item', eventId],
+				(oldData: Event) => {
+					return {
+						...oldData,
+						schedule: [response, ...oldData.schedule],
+					};
+				}
+			);
+		} else {
+			const response = await updateScheduleItemById(
+				defaultValues.id as string,
+				{
+					...validatedFields.data,
+				}
+			);
+
+			queryClient.setQueryData(
+				['get-event-schedule-item', eventId],
+				(oldData: Event) => {
+					const data = {
+						...oldData,
+						schedule: oldData.schedule.map((item) => {
+							if (item.id === response.id) {
+								return response;
+							}
+
+							return item;
+						}),
+					};
+
+					return data;
+				}
+			);
 		}
-
-		const response = await updateScheduleItemById(defaultValues.id as string, {
-			...validatedFields.data,
-		});
-
-		queryClient.setQueryData(
-			['get-event-schedule', eventId],
-			(oldData: Event) => {
-				const data = {
-					...oldData,
-					schedule: oldData.schedule.map((item) => {
-						if (item.id === response.id) {
-							return response;
-						}
-					}),
-				};
-
-				return data;
-			}
-		);
 
 		setEventIdToEdit(undefined);
 
-		toast.success('Schedule Item has been created.');
+		toast.success('Schedule item saved successfully!');
 	};
 
 	return (
-		<>
-			<div className='flex items-center justify-center absolute top-0 left-0 backdrop-blur-sm bg-muted/10 w-full h-[calc(100vh-2rem)]'>
-				<Card className='w-[500px]'>
-					<CardHeader>
-						<CardTitle>Schedule Item</CardTitle>
-						<CardDescription>Create/edit a new schedule item</CardDescription>
-					</CardHeader>
-					<CardContent>
-						<form
-							className='space-y-4'
-							action={saveData}
+		<div className='flex items-center justify-center fixed top-0 left-0 backdrop-blur-sm bg-muted/10 w-full h-full'>
+			<Card className='w-[500px]'>
+				<CardHeader>
+					<CardTitle>Schedule Item</CardTitle>
+					<CardDescription>Create/edit a new schedule item</CardDescription>
+				</CardHeader>
+				<CardContent>
+					<form
+						className='space-y-4'
+						action={saveData}
+					>
+						<FormField
+							name='title'
+							label='Event Name'
+							description='Enter the name of the event.'
 						>
-							<FormField
+							<Input
+								type='text'
+								id='title'
 								name='title'
-								label='Event Name'
-								description='Enter the name of the event.'
+								placeholder='Chess Tournament'
+								defaultValue={defaultValues?.title}
+							/>
+						</FormField>
+						<FormField
+							name='description'
+							label='Event Description'
+							description='Provide a detailed description of the event.'
+						>
+							<Textarea
+								id='description'
+								name='description'
+								placeholder='Detailed description of the event...'
+								className='resize-none'
+								defaultValue={defaultValues?.description as string}
+							/>
+						</FormField>
+
+						<div className='flex w-full gap-2'>
+							<FormField
+								name='startTime'
+								label='Start Time'
+								description='Select the start time of the event.'
 							>
 								<Input
-									type='text'
-									id='title'
-									name='title'
-									placeholder='Chess Tournament'
-									defaultValue={defaultValues?.title}
+									type='time'
+									id='startTime'
+									name='startTime'
+									defaultValue={defaultValues?.startTime}
 								/>
 							</FormField>
 							<FormField
-								name='description'
-								label='Event Description'
-								description='Provide a detailed description of the event.'
+								name='endTime'
+								label='End Time'
+								description='Select the end time of the event.'
 							>
-								<Textarea
-									id='description'
-									name='description'
-									placeholder='Detailed description of the event...'
-									className='resize-none'
-									defaultValue={defaultValues?.description as string}
+								<Input
+									type='time'
+									id='endTime'
+									name='endTime'
+									defaultValue={defaultValues?.endTime}
 								/>
 							</FormField>
+						</div>
 
-							<div className='flex w-full gap-2'>
-								<FormField
-									name='startTime'
-									label='Start Time'
-									description='Select the start time of the event.'
-								>
-									<Input
-										type='time'
-										id='startTime'
-										name='startTime'
-										defaultValue={defaultValues?.startTime}
-									/>
-								</FormField>
-								<FormField
-									name='endTime'
-									label='End Time'
-									description='Select the end time of the event.'
-								>
-									<Input
-										type='time'
-										id='endTime'
-										name='endTime'
-										defaultValue={defaultValues?.endTime}
-									/>
-								</FormField>
-							</div>
-
-							<div className='flex justify-between'>
-								<Button
-									variant='outline'
-									onClick={() => setEventIdToEdit(undefined)}
-								>
-									Cancel
-								</Button>
-								<Button type='submit'>Save</Button>
-							</div>
-						</form>
-					</CardContent>
-				</Card>
-			</div>
-			<div className='w-full h-full absolute blur-sm'></div>
-		</>
+						<div className='flex justify-between'>
+							<Button
+								variant='outline'
+								onClick={() => setEventIdToEdit(undefined)}
+							>
+								Cancel
+							</Button>
+							<Button type='submit'>Save</Button>
+						</div>
+					</form>
+				</CardContent>
+			</Card>
+		</div>
 	);
 }

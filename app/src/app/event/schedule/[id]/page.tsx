@@ -18,20 +18,19 @@ import {
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Clock9, Pencil, Trash } from 'lucide-react';
+import { Clock9, Pencil, Plus, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 
 const Page = ({ params }: { params: { id: string } }) => {
 	const queryClient = useQueryClient();
-	const router = useRouter();
 
 	const [eventIdToDelete, setEventIdToDelete] = useState<string>();
 	const [eventIdToEdit, setEventIdToEdit] = useState<string>();
 
 	const { data: event } = useQuery({
-		queryKey: ['get-event-schedule', params.id],
+		queryKey: ['get-event-schedule-item', params.id],
 		queryFn: () => getEventSchedule(params.id),
 	});
 
@@ -41,7 +40,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 		const response = await deleteScheduleItemById(eventIdToDelete);
 
 		queryClient.setQueryData(
-			['get-event-schedule', params.id],
+			['get-event-schedule-item', params.id],
 			(oldData: Event) => {
 				const data = {
 					...oldData,
@@ -55,13 +54,31 @@ const Page = ({ params }: { params: { id: string } }) => {
 		setEventIdToDelete(undefined);
 
 		toast.success('Schedule item has been deleted.');
-
-		router.push(`/event/${params.id}`);
 	};
 
 	return (
 		<div className='relative'>
+			{eventIdToEdit && (
+				<CardWithForm
+					eventId={params.id}
+					setEventIdToEdit={setEventIdToEdit}
+					defaultValues={
+						eventIdToEdit === 'new'
+							? undefined
+							: event?.schedule.find((item) => item.id === eventIdToEdit)
+					}
+				/>
+			)}
+
 			<Title>Event Schedule</Title>
+
+			<Button
+				onClick={() => setEventIdToEdit('new')}
+				className='my-4'
+			>
+				Create New Schedule Item
+				<Plus className='size-5 ml-2' />
+			</Button>
 
 			<Section
 				title='Schedule'
@@ -102,16 +119,6 @@ const Page = ({ params }: { params: { id: string } }) => {
 					)}
 				</div>
 			</Section>
-
-			{eventIdToEdit && (
-				<CardWithForm
-					eventId={params.id}
-					setEventIdToEdit={setEventIdToEdit}
-					defaultValues={event?.schedule.find(
-						(item) => item.id === eventIdToEdit
-					)}
-				/>
-			)}
 
 			<AlertDialog
 				open={!!eventIdToDelete}
