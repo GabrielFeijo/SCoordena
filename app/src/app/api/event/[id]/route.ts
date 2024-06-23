@@ -151,7 +151,7 @@ export {
 
 /**
  * @swagger
- * /api/events/{id}:
+ * /api/event/{id}:
  *   get:
  *     summary: Get event by ID
  *     description: Retrieve detailed information about an event by its ID.
@@ -195,7 +195,7 @@ export {
 
 /**
  * @swagger
- * /api/events/{id}:
+ * /api/event/{id}:
  *   patch:
  *     summary: Update event by ID
  *     description: Update details of an event by its ID.
@@ -245,7 +245,7 @@ export {
 
 /**
  * @swagger
- * /api/events/{id}:
+ * /api/event/{id}:
  *   delete:
  *     summary: Delete event by ID
  *     description: Delete an event by its ID.

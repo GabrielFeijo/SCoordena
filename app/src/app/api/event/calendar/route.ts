@@ -33,3 +33,42 @@ const getCalendarEvents = async () => {
 };
 
 export { getCalendarEvents as GET };
+
+/**
+ * @swagger
+ * /api/event/calendar:
+ *   get:
+ *     summary: Get calendar events
+ *     description: Returns a list of calendar events.
+ *     tags:
+ *       - Events
+ *     responses:
+ *       200:
+ *         description: Calendar events retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/CalendarEvent'
+ *       401:
+ *         description: Unauthorized. User session is not valid.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Unauthorized
+ *       500:
+ *         description: Internal Server Error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Internal Server Error
+ */

@@ -65,7 +65,7 @@ export { createEvent as POST, getEvents as GET };
 
 /**
  * @swagger
- * /api/events:
+ * /api/event:
  *   post:
  *     summary: Create a new event
  *     description: Creates a new event entry.

@@ -4,6 +4,8 @@ import { db } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
+import { z } from 'zod';
+
 const registerUserToEvent = async (req: NextRequest) => {
 	try {
 		const session = await getServerSession(authOptions);
@@ -12,10 +14,26 @@ const registerUserToEvent = async (req: NextRequest) => {
 			return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 		}
 
-		const data: { eventId: string; userId: string } = await req.json();
+		const schema = z.object({
+			eventId: z.string().cuid(),
+			userId: z.string().cuid(),
+		});
+
+		const body = await req.json();
+
+		const response = schema.safeParse(body);
+
+		if (!response.success) {
+			const { errors } = response.error;
+
+			return NextResponse.json(
+				{ error: { message: 'Invalid request', errors } },
+				{ status: 400 }
+			);
+		}
 
 		const registration = await db.registration.create({
-			data,
+			data: response.data,
 			select: {
 				user: {
 					select: {
@@ -42,7 +60,7 @@ export { registerUserToEvent as POST };
 
 /**
  * @swagger
- * /api/register:
+ * /api/registration:
  *   post:
  *     summary: Register user for an event
  *     description: Registers a user for an event by creating a registration entry in the database.

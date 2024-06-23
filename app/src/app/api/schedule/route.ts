@@ -27,3 +27,45 @@ const createScheduleItem = async (req: NextRequest) => {
 };
 
 export { createScheduleItem as POST };
+
+/**
+ * @swagger
+ * /api/schedule:
+ *   post:
+ *     summary: Create a new schedule item
+ *     description: Creates a new schedule item in the database.
+ *     tags: [Schedule]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ScheduleInput'
+ *     responses:
+ *       201:
+ *         description: Schedule item created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Schedule'
+ *       401:
+ *         description: Unauthorized. User session is not valid.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Unauthorized
+ *       500:
+ *         description: Internal Server Error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Internal Server Error
+ */

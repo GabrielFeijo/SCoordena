@@ -71,3 +71,90 @@ const deleteScheduleItemById = async (
 };
 
 export { updateScheduleItemById as PATCH, deleteScheduleItemById as DELETE };
+
+/**
+ * @swagger
+ * /api/schedule/{id}:
+ *   patch:
+ *     summary: Update a schedule item
+ *     description: Updates an existing schedule item by its ID.
+ *     tags: [Schedule]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the schedule item to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ScheduleInput'
+ *     responses:
+ *       200:
+ *         description: Schedule item updated successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Schedule'
+ *       401:
+ *         description: Unauthorized. User session is not valid.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Unauthorized
+ *       500:
+ *         description: Internal Server Error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Internal Server Error
+ *   delete:
+ *     summary: Delete a schedule item
+ *     description: Deletes a schedule item by its ID.
+ *     tags: [Schedule]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the schedule item to delete
+ *     responses:
+ *       200:
+ *         description: Schedule item deleted successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Schedule'
+ *       401:
+ *         description: Unauthorized. User session is not valid.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Unauthorized
+ *       500:
+ *         description: Internal Server Error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Internal Server Error
+ */

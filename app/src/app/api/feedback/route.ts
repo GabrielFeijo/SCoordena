@@ -46,7 +46,7 @@ export { createFeedback as POST };
 
 /**
  * @swagger
- * /api/feedbacks:
+ * /api/feedback:
  *   post:
  *     summary: Create new feedback
  *     description: Creates a new feedback entry.

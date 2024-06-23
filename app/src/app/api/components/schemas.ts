@@ -1,6 +1,8 @@
 /**
  * @swagger
  * tags:
+ *   - name: Schedule
+ *     description: API for managing schedule items
  *   - name: Events
  *     description: Operations related to events
  *   - name: Metrics
@@ -26,11 +28,21 @@
  *           description: Name of the event.
  *         date:
  *           type: string
- *           format: date
+ *           format: date-time
  *           description: Date of the event (YYYY-MM-DD).
  *         description:
  *           type: string
  *           description: Description of the event.
+ *         image:
+ *           type: string
+ *           description: Image URL of the event.
+ *         location:
+ *           type: string
+ *           description: Location of the event.
+ *         organizerId:
+ *           type: string
+ *           format: cuid
+ *           description: ID of the organizer.
  *     Event:
  *       type: object
  *       properties:
@@ -120,11 +132,11 @@
  *           description: Description of the schedule item.
  *         startTime:
  *           type: string
- *           format: date-time
+ *           format: string
  *           description: Start time of the schedule item.
  *         endTime:
  *           type: string
- *           format: date-time
+ *           format: string
  *           description: End time of the schedule item.
  *     Feedback:
  *       type: object
@@ -176,13 +188,19 @@
  *           type: string
  *           description: The comment given in the feedback.
  *           example: Great event!
+ *         eventId:
+ *           type: string
+ *           format: cuid
+ *           description: The ID of the event.
  *         userId:
  *           type: string
+ *           format: cuid
  *           description: The ID of the user giving the feedback.
  *           example: abc123
  *       required:
  *         - rating
  *         - userId
+ *         - eventId
  *
  *     Feedback:
  *       allOf:
@@ -225,4 +243,85 @@
  *                   type: string
  *                   description: The image URL of the user who gave the feedback.
  *                   example: https://example.com/avatar.jpg
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Schedule:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: cuid
+ *           description: The unique identifier of the schedule item.
+ *         title:
+ *           type: string
+ *           description: The title of the schedule item.
+ *         description:
+ *           type: string
+ *           description: The description of the schedule item.
+ *         startTime:
+ *           type: string
+ *           format: string
+ *           description: The start time of the schedule item.
+ *         endTime:
+ *           type: string
+ *           format: string
+ *           description: The end time of the schedule item.
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The creation timestamp of the schedule item.
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The last update timestamp of the schedule item.
+ *     ScheduleInput:
+ *       type: object
+ *       properties:
+ *         eventId:
+ *           type: string
+ *           description: The ID of the event.
+ *           format: cuid
+ *         title:
+ *           type: string
+ *           description: The title of the schedule item.
+ *         description:
+ *           type: string
+ *           description: The description of the schedule item.
+ *         startTime:
+ *           type: string
+ *           format: string
+ *           description: The start time of the schedule item.
+ *         endTime:
+ *           type: string
+ *           format: string
+ *           description: The end time of the schedule item.
+ *       required:
+ *         - eventId
+ *         - title
+ *         - startTime
+ *         - endTime
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     CalendarEvent:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: cuid
+ *           description: The unique identifier of the event.
+ *         name:
+ *           type: string
+ *           description: The name of the event.
+ *         date:
+ *           type: string
+ *           format: date-time
+ *           description: The date of the event.
  */
