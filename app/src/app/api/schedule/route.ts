@@ -5,6 +5,8 @@ import { Schedule } from '@prisma/client';
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
+import { z } from 'zod';
+
 const createScheduleItem = async (req: NextRequest) => {
 	try {
 		const session = await getServerSession(authOptions);
@@ -13,9 +15,28 @@ const createScheduleItem = async (req: NextRequest) => {
 			return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 		}
 
-		const data: Schedule = await req.json();
+		const schema = z.object({
+			title: z.string().min(1),
+			description: z.string().optional(),
+			startTime: z.string().min(1),
+			endTime: z.string().min(1),
+			eventId: z.string().cuid(),
+		});
 
-		const schedule = await db.schedule.create({ data });
+		const body = await req.json();
+
+		const response = schema.safeParse(body);
+
+		if (!response.success) {
+			const { errors } = response.error;
+
+			return NextResponse.json(
+				{ error: { message: 'Invalid request', errors } },
+				{ status: 400 }
+			);
+		}
+
+		const schedule = await db.schedule.create({ data: response.data });
 
 		return NextResponse.json(schedule, { status: 201 });
 	} catch (error) {

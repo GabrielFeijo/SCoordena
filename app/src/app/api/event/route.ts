@@ -5,6 +5,8 @@ import { Event } from '@prisma/client';
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
+import { z } from 'zod';
+
 const createEvent = async (req: NextRequest) => {
 	try {
 		const session = await getServerSession(authOptions);
@@ -13,9 +15,29 @@ const createEvent = async (req: NextRequest) => {
 			return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 		}
 
-		const data: Event = await req.json();
+		const schema = z.object({
+			name: z.string().min(1),
+			description: z.string().optional(),
+			image: z.string().optional(),
+			date: z.string().transform((value) => new Date(value + 'T00:00:00')),
+			location: z.string().min(1),
+			organizerId: z.string().cuid(),
+		});
 
-		const event = await db.event.create({ data });
+		const body = await req.json();
+
+		const response = schema.safeParse(body);
+
+		if (!response.success) {
+			const { errors } = response.error;
+
+			return NextResponse.json(
+				{ error: { message: 'Invalid request', errors } },
+				{ status: 400 }
+			);
+		}
+
+		const event = await db.event.create({ data: response.data });
 
 		return NextResponse.json(event, { status: 201 });
 	} catch (error) {

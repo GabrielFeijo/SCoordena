@@ -1,9 +1,10 @@
 import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/prisma';
-import { Feedback } from '@prisma/client';
 
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { z } from 'zod';
 
 const createFeedback = async (req: NextRequest) => {
 	try {
@@ -13,10 +14,28 @@ const createFeedback = async (req: NextRequest) => {
 			return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 		}
 
-		const data: Feedback = await req.json();
+		const schema = z.object({
+			rating: z.number().min(1).max(5),
+			comment: z.string().min(1),
+			eventId: z.string().cuid(),
+			userId: z.string().cuid(),
+		});
+
+		const body = await req.json();
+
+		const response = schema.safeParse(body);
+
+		if (!response.success) {
+			const { errors } = response.error;
+
+			return NextResponse.json(
+				{ error: { message: 'Invalid request', errors } },
+				{ status: 400 }
+			);
+		}
 
 		const feedback = await db.feedback.create({
-			data,
+			data: response.data,
 			select: {
 				id: true,
 				rating: true,

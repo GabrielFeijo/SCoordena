@@ -28,7 +28,7 @@
  *           description: Name of the event.
  *         date:
  *           type: string
- *           format: date-time
+ *           format: date
  *           description: Date of the event (YYYY-MM-DD).
  *         description:
  *           type: string
