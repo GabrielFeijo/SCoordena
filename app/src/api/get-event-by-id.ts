@@ -50,8 +50,8 @@ export type Schedule = {
 	id: string;
 	title: string;
 	description: string | null;
-	startTime: Date;
-	endTime: Date;
+	startTime: string;
+	endTime: string;
 };
 
 export async function getEventById(id: string) {

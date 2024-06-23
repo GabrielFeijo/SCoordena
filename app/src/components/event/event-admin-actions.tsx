@@ -53,7 +53,7 @@ const EventAdminActions = ({ id }: { id: string }) => {
 					variant='secondary'
 					asChild
 				>
-					<Link href={`/event/edit/${id}`}>
+					<Link href={`/event/schedule/${id}`}>
 						<CalendarCog className='mr-2 size-4' />
 						Edit Schedule
 					</Link>

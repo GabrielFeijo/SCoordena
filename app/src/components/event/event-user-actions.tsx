@@ -41,7 +41,7 @@ const EventUserActions = ({
 			userId: data.user.id as string,
 		});
 
-		queryClient.setQueryData(['get-event'], (oldData: Event) => {
+		queryClient.setQueryData(['get-event', id], (oldData: Event) => {
 			const data = {
 				...oldData,
 				registrations: [response, ...oldData.registrations],

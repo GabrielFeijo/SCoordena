@@ -1,4 +1,5 @@
 import React from 'react';
+import { Label } from '../ui/label';
 
 interface FormFieldProps {
 	name: string;
@@ -18,7 +19,7 @@ const FormField = ({
 	return (
 		<div className='space-y-2'>
 			<div>
-				<label htmlFor={name}>{label}</label>
+				<Label htmlFor={name}>{label}</Label>
 				<p className='text-sm text-muted-foreground'>{description}</p>
 			</div>
 

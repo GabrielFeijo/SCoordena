@@ -44,8 +44,8 @@ async function main() {
 			eventId: events[i % events.length].id,
 			title: faker.lorem.words(2),
 			description: faker.lorem.sentence(),
-			startTime: faker.date.future(),
-			endTime: faker.date.future(),
+			startTime: `${faker.number.int({ min: 10, max: 24 })}:00`,
+			endTime: `${faker.number.int({ min: 10, max: 24 })}:00`,
 		});
 	}
 	await prisma.schedule.createMany({
