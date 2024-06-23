@@ -112,9 +112,14 @@ const Page = ({ params }: { params: { id: string } }) => {
 							</div>
 						))
 					) : (
-						<div className='space-y-4'>
-							<Skeleton className='w-full h-14' />
-						</div>
+						<>
+							{Array.from({ length: 3 }).map((_, i) => (
+								<Skeleton
+									className='w-full h-14 bg-secondary'
+									key={i}
+								/>
+							))}
+						</>
 					)}
 				</div>
 			</Section>

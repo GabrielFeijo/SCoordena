@@ -11,6 +11,8 @@
  *     description: Operations related to feedbacks
  *   - name: Registration
  *     description: Operations related to user registration for events
+ *   - name: Users
+ *     description: API for managing users
  */
 
 /**
@@ -324,4 +326,43 @@
  *           type: string
  *           format: date-time
  *           description: The date of the event.
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier of the user.
+ *         name:
+ *           type: string
+ *           description: The name of the user.
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: The email address of the user.
+ *         image:
+ *           type: string
+ *           description: The URL of the user's image.
+ *     UserInput:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The name of the user.
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: The email address of the user.
+ *         image:
+ *           type: string
+ *           description: The URL of the user's image.
+ *       required:
+ *         - name
+ *         - email
  */

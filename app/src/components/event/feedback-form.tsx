@@ -1,7 +1,7 @@
 import FormField from './form-field';
 import { Star } from 'lucide-react';
 import { Button } from '../ui/button';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Textarea } from '../ui/textarea';
 import { toast } from 'sonner';
 import { useSession } from 'next-auth/react';
@@ -13,6 +13,7 @@ const FeedbackForm = ({ eventId }: { eventId: string }) => {
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
 
+	const formRef = useRef<HTMLFormElement>(null);
 	const [rating, setRating] = useState(0);
 
 	const handleSubmit = async (formData: FormData) => {
@@ -29,7 +30,7 @@ const FeedbackForm = ({ eventId }: { eventId: string }) => {
 			userId: session?.user?.id as string,
 		});
 
-		queryClient.setQueryData(['get-event'], (oldData: Event) => {
+		queryClient.setQueryData(['get-event', eventId], (oldData: Event) => {
 			const data = {
 				...oldData,
 				feedbacks: [response, ...oldData.feedbacks],
@@ -37,12 +38,17 @@ const FeedbackForm = ({ eventId }: { eventId: string }) => {
 
 			return data;
 		});
+
+		formRef.current?.reset();
+		setRating(0);
+		toast.success('Feedback has been sent.');
 	};
 
 	return (
 		<form
 			className='p-4 rounded space-y-4 border'
 			action={handleSubmit}
+			ref={formRef}
 		>
 			<h3 className='text-xl font-semibold'>Leave a Feedback</h3>
 

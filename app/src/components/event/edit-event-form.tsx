@@ -79,7 +79,7 @@ export function EditEventForm({
 				</CardHeader>
 				<CardContent>
 					<form
-						className='space-y-4'
+						className='space-y-2'
 						action={editEvent}
 					>
 						<FormField
