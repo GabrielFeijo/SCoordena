@@ -6,10 +6,9 @@ export type Event = {
 	description?: string;
 	date: Date;
 	location: string;
-	organizerId: string;
 };
 
-export async function updateEventHandler(id: string, data: Event) {
+export async function updateEvent(id: string, data: Event) {
 	const response = await api.patch(`/api/event/${id}`, data);
 
 	return response.data;
