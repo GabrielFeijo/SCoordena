@@ -35,6 +35,7 @@ const registerUserToEvent = async (req: NextRequest) => {
 		const registration = await db.registration.create({
 			data: response.data,
 			select: {
+				id: true,
 				user: {
 					select: {
 						id: true,
@@ -87,6 +88,10 @@ export { registerUserToEvent as POST };
  *             schema:
  *               type: object
  *               properties:
+ *                 id:
+ *                   type: string
+ *                   format: cuid
+ *                   description: ID of the registration.
  *                 user:
  *                   type: object
  *                   properties:
