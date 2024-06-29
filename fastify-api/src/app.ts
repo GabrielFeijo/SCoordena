@@ -3,6 +3,8 @@ import fjwt, { FastifyJWT } from '@fastify/jwt';
 import fCookie from '@fastify/cookie';
 import { userSchemas } from './modules/user/user.schema';
 import userRoutes from './modules/user/user.route';
+import metricRoutes from './modules/metric/metric.route';
+import { metricSchemas } from './modules/metric/metric.schema';
 
 const server = Fastify();
 
@@ -25,11 +27,12 @@ server.get('/helloworld', async (req, res) => {
 });
 
 async function main() {
-	for (const schema of userSchemas) {
+	for (const schema of [...userSchemas, ...metricSchemas]) {
 		server.addSchema(schema);
 	}
 
 	server.register(userRoutes, { prefix: 'api/users' });
+	server.register(metricRoutes, { prefix: 'api/metric' });
 
 	try {
 		await server.listen({ port: 3333, host: '0.0.0.0' });
