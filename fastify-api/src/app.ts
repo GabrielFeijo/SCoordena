@@ -5,6 +5,8 @@ import { userSchemas } from './modules/user/user.schema';
 import userRoutes from './modules/user/user.route';
 import metricRoutes from './modules/metric/metric.route';
 import { metricSchemas } from './modules/metric/metric.schema';
+import { feedbackSchemas } from './modules/feedback/feedback.schema';
+import feedbackRoutes from './modules/feedback/feedback.route';
 
 const server = Fastify();
 
@@ -27,12 +29,13 @@ server.get('/helloworld', async (req, res) => {
 });
 
 async function main() {
-	for (const schema of [...userSchemas, ...metricSchemas]) {
+	for (const schema of [...userSchemas, ...metricSchemas, ...feedbackSchemas]) {
 		server.addSchema(schema);
 	}
 
 	server.register(userRoutes, { prefix: 'api/users' });
 	server.register(metricRoutes, { prefix: 'api/metric' });
+	server.register(feedbackRoutes, { prefix: 'api/feedback' });
 
 	try {
 		await server.listen({ port: 3333, host: '0.0.0.0' });
