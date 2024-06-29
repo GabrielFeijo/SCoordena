@@ -1,13 +1,32 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
-import { getEventsPerMonth } from './metric.service';
+import { FastifyRequest } from 'fastify';
+import {
+	getEventsPerMonth,
+	getTotalEvents,
+	getTotalFeedbacks,
+	getTotalUsers,
+	getUpcomingEvents,
+} from './metric.service';
 
 export async function getEventsPerMonthHandler(
 	request: FastifyRequest<{
 		Querystring: { year?: string };
-	}>,
-	reply: FastifyReply
+	}>
 ) {
-	const events = await getEventsPerMonth(request.query.year);
+	return await getEventsPerMonth(request.query.year);
+}
 
-	return events;
+export async function getUpcomingEventsHandler() {
+	return await getUpcomingEvents();
+}
+
+export async function getTotalEventsHandler() {
+	return await getTotalEvents();
+}
+
+export async function getTotalFeedbacksHandler() {
+	return await getTotalFeedbacks();
+}
+
+export async function getTotalUsersHandler() {
+	return await getTotalUsers();
 }

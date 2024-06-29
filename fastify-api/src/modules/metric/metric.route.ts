@@ -1,5 +1,11 @@
 import { FastifyInstance } from 'fastify';
-import { getEventsPerMonthHandler } from './metric.controller';
+import {
+	getEventsPerMonthHandler,
+	getTotalEventsHandler,
+	getTotalFeedbacksHandler,
+	getTotalUsersHandler,
+	getUpcomingEventsHandler,
+} from './metric.controller';
 import { $ref } from './metric.schema';
 
 async function metricRoutes(server: FastifyInstance) {
@@ -14,6 +20,54 @@ async function metricRoutes(server: FastifyInstance) {
 			},
 		},
 		getEventsPerMonthHandler
+	);
+
+	server.get(
+		'/last-events',
+		{
+			schema: {
+				response: {
+					200: $ref('getUpcomingEventsResponseSchema'),
+				},
+			},
+		},
+		getUpcomingEventsHandler
+	);
+
+	server.get(
+		'/total-events',
+		{
+			schema: {
+				response: {
+					200: $ref('getTotalResponseSchema'),
+				},
+			},
+		},
+		getTotalEventsHandler
+	);
+
+	server.get(
+		'/total-feedbacks',
+		{
+			schema: {
+				response: {
+					200: $ref('getTotalResponseSchema'),
+				},
+			},
+		},
+		getTotalFeedbacksHandler
+	);
+
+	server.get(
+		'/total-users',
+		{
+			schema: {
+				response: {
+					200: $ref('getTotalResponseSchema'),
+				},
+			},
+		},
+		getTotalUsersHandler
 	);
 }
 

@@ -17,9 +17,24 @@ const getEventsPerMonthResponseSchema = z.array(
 	})
 );
 
+const getUpcomingEventsResponseSchema = z.array(
+	z.object({
+		id: z.string().cuid(),
+		name: z.string(),
+		date: z.string(),
+	})
+);
+
+const getTotalResponseSchema = z.object({
+	total: z.number(),
+	difference: z.number(),
+});
+
 export const { schemas: metricSchemas, $ref } = buildJsonSchemas(
 	{
 		getEventsPerMonthResponseSchema,
+		getUpcomingEventsResponseSchema,
+		getTotalResponseSchema,
 		getEventsPerMonthSchema,
 	},
 	{
