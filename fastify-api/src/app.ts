@@ -11,6 +11,8 @@ import { registrationSchemas } from './modules/registration/registration.schema'
 import registrationRoutes from './modules/registration/registration.route';
 import { scheduleSchemas } from './modules/schedule/schedule.schema';
 import scheduleRoutes from './modules/schedule/schedule.route';
+import { eventSchemas } from './modules/event/event.schema';
+import eventRoutes from './modules/event/event.route';
 
 const server = Fastify();
 
@@ -39,6 +41,7 @@ async function main() {
 		...feedbackSchemas,
 		...registrationSchemas,
 		...scheduleSchemas,
+		...eventSchemas,
 	]) {
 		server.addSchema(schema);
 	}
@@ -48,6 +51,7 @@ async function main() {
 	server.register(feedbackRoutes, { prefix: 'api/feedback' });
 	server.register(registrationRoutes, { prefix: 'api/registration' });
 	server.register(scheduleRoutes, { prefix: 'api/schedule' });
+	server.register(eventRoutes, { prefix: 'api/event' });
 
 	try {
 		await server.listen({ port: 3333, host: '0.0.0.0' });
