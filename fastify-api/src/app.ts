@@ -7,6 +7,8 @@ import metricRoutes from './modules/metric/metric.route';
 import { metricSchemas } from './modules/metric/metric.schema';
 import { feedbackSchemas } from './modules/feedback/feedback.schema';
 import feedbackRoutes from './modules/feedback/feedback.route';
+import { registrationSchemas } from './modules/registration/registration.schema';
+import registrationRoutes from './modules/registration/registration.route';
 
 const server = Fastify();
 
@@ -29,13 +31,19 @@ server.get('/helloworld', async (req, res) => {
 });
 
 async function main() {
-	for (const schema of [...userSchemas, ...metricSchemas, ...feedbackSchemas]) {
+	for (const schema of [
+		...userSchemas,
+		...metricSchemas,
+		...feedbackSchemas,
+		...registrationSchemas,
+	]) {
 		server.addSchema(schema);
 	}
 
 	server.register(userRoutes, { prefix: 'api/users' });
 	server.register(metricRoutes, { prefix: 'api/metric' });
 	server.register(feedbackRoutes, { prefix: 'api/feedback' });
+	server.register(registrationRoutes, { prefix: 'api/registration' });
 
 	try {
 		await server.listen({ port: 3333, host: '0.0.0.0' });

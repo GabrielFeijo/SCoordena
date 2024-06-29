@@ -11,8 +11,8 @@ export async function registerFeedbackHandler(
 	const body = request.body;
 
 	try {
-		const user = await createFeedback(body);
-		return reply.status(201).send(user);
+		const feedback = await createFeedback(body);
+		return reply.status(201).send(feedback);
 	} catch (error) {
 		console.error(error);
 		reply.status(500).send({
