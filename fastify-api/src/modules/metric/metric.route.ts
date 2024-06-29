@@ -12,6 +12,7 @@ async function metricRoutes(server: FastifyInstance) {
 	server.get(
 		'/events-per-month',
 		{
+			preHandler: [server.authenticate],
 			schema: {
 				querystring: $ref('getEventsPerMonthSchema'),
 				response: {
@@ -25,6 +26,7 @@ async function metricRoutes(server: FastifyInstance) {
 	server.get(
 		'/last-events',
 		{
+			preHandler: [server.authenticate],
 			schema: {
 				response: {
 					200: $ref('getUpcomingEventsResponseSchema'),
@@ -37,6 +39,7 @@ async function metricRoutes(server: FastifyInstance) {
 	server.get(
 		'/total-events',
 		{
+			preHandler: [server.authenticate],
 			schema: {
 				response: {
 					200: $ref('getTotalResponseSchema'),
@@ -49,6 +52,7 @@ async function metricRoutes(server: FastifyInstance) {
 	server.get(
 		'/total-feedbacks',
 		{
+			preHandler: [server.authenticate],
 			schema: {
 				response: {
 					200: $ref('getTotalResponseSchema'),
@@ -61,6 +65,7 @@ async function metricRoutes(server: FastifyInstance) {
 	server.get(
 		'/total-users',
 		{
+			preHandler: [server.authenticate],
 			schema: {
 				response: {
 					200: $ref('getTotalResponseSchema'),

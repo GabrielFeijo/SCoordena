@@ -13,12 +13,27 @@ import { scheduleSchemas } from './modules/schedule/schedule.schema';
 import scheduleRoutes from './modules/schedule/schedule.route';
 import { eventSchemas } from './modules/event/event.schema';
 import eventRoutes from './modules/event/event.route';
+import { UserPayload } from '../global';
 
 const server = Fastify();
 
 server.register(fjwt, {
 	secret: process.env.JWT_SECRET || 'some-secret-key',
 });
+
+server.decorate(
+	'authenticate',
+	async (request: FastifyRequest, reply: FastifyReply) => {
+		const token = request.cookies.access_token;
+
+		if (!token) {
+			return reply.status(401).send({ message: 'Authentication required' });
+		}
+
+		const decoded = request.jwt.verify(token);
+		request.user = decoded as UserPayload;
+	}
+);
 
 server.addHook('preHandler', (req: FastifyRequest, res: FastifyReply, next) => {
 	req.jwt = server.jwt;
@@ -46,7 +61,7 @@ async function main() {
 		server.addSchema(schema);
 	}
 
-	server.register(userRoutes, { prefix: 'api/users' });
+	server.register(userRoutes, { prefix: 'api/user' });
 	server.register(metricRoutes, { prefix: 'api/metric' });
 	server.register(feedbackRoutes, { prefix: 'api/feedback' });
 	server.register(registrationRoutes, { prefix: 'api/registration' });

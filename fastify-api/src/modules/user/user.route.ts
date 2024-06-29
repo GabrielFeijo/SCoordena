@@ -1,6 +1,10 @@
 import { FastifyInstance } from 'fastify';
 
-import { loginHandler, registerUserHandler } from './user.controller';
+import {
+	loginHandler,
+	logoutHandler,
+	registerUserHandler,
+} from './user.controller';
 
 import { $ref } from './user.schema';
 
@@ -29,6 +33,14 @@ async function userRoutes(server: FastifyInstance) {
 			},
 		},
 		loginHandler
+	);
+
+	server.delete(
+		'/logout',
+		{
+			preHandler: [server.authenticate],
+		},
+		logoutHandler
 	);
 }
 

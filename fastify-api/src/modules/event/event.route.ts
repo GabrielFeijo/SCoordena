@@ -1,4 +1,4 @@
-import { FastifyInstance } from 'fastify';
+import fastify, { FastifyInstance } from 'fastify';
 import { $ref } from './event.schema';
 import {
 	deleteEventByIdHandler,
@@ -15,6 +15,7 @@ async function eventRoutes(server: FastifyInstance) {
 	server.get(
 		'/',
 		{
+			preHandler: [server.authenticate],
 			schema: {
 				response: {
 					200: $ref('getEventsResponseSchema'),
@@ -27,6 +28,7 @@ async function eventRoutes(server: FastifyInstance) {
 	server.get(
 		'/calendar',
 		{
+			preHandler: [server.authenticate],
 			schema: {
 				response: {
 					200: $ref('getCalendarEventsResponseSchema'),
@@ -39,6 +41,7 @@ async function eventRoutes(server: FastifyInstance) {
 	server.get(
 		'/schedule/:id',
 		{
+			preHandler: [server.authenticate],
 			schema: {
 				response: {
 					200: $ref('getEventScheduleResponseSchema'),
@@ -51,6 +54,7 @@ async function eventRoutes(server: FastifyInstance) {
 	server.get(
 		'/user/:id',
 		{
+			preHandler: [server.authenticate],
 			schema: {
 				response: {
 					200: $ref('getUserEventsResponseSchema'),
@@ -63,6 +67,7 @@ async function eventRoutes(server: FastifyInstance) {
 	server.post(
 		'/',
 		{
+			preHandler: [server.authenticate],
 			schema: {
 				body: $ref('createEventSchema'),
 				response: {
@@ -76,6 +81,7 @@ async function eventRoutes(server: FastifyInstance) {
 	server.get(
 		'/:id',
 		{
+			preHandler: [server.authenticate],
 			schema: {
 				response: {
 					200: $ref('getEventResponseSchema'),
@@ -88,6 +94,7 @@ async function eventRoutes(server: FastifyInstance) {
 	server.patch(
 		'/:id',
 		{
+			preHandler: [server.authenticate],
 			schema: {
 				body: $ref('createEventSchema'),
 				response: {
@@ -101,6 +108,7 @@ async function eventRoutes(server: FastifyInstance) {
 	server.delete(
 		'/:id',
 		{
+			preHandler: [server.authenticate],
 			schema: {
 				response: {
 					204: {},
