@@ -17,6 +17,7 @@ async function eventRoutes(server: FastifyInstance) {
 		{
 			preHandler: [server.authenticate],
 			schema: {
+				tags: ['Events'],
 				response: {
 					200: $ref('getEventsResponseSchema'),
 				},
@@ -30,6 +31,7 @@ async function eventRoutes(server: FastifyInstance) {
 		{
 			preHandler: [server.authenticate],
 			schema: {
+				tags: ['Events'],
 				response: {
 					200: $ref('getCalendarEventsResponseSchema'),
 				},
@@ -43,6 +45,7 @@ async function eventRoutes(server: FastifyInstance) {
 		{
 			preHandler: [server.authenticate],
 			schema: {
+				tags: ['Events'],
 				response: {
 					200: $ref('getEventScheduleResponseSchema'),
 				},
@@ -56,6 +59,7 @@ async function eventRoutes(server: FastifyInstance) {
 		{
 			preHandler: [server.authenticate],
 			schema: {
+				tags: ['Events'],
 				response: {
 					200: $ref('getUserEventsResponseSchema'),
 				},
@@ -69,6 +73,7 @@ async function eventRoutes(server: FastifyInstance) {
 		{
 			preHandler: [server.authenticate],
 			schema: {
+				tags: ['Events'],
 				body: $ref('createEventSchema'),
 				response: {
 					201: $ref('createEventResponseSchema'),
@@ -83,6 +88,7 @@ async function eventRoutes(server: FastifyInstance) {
 		{
 			preHandler: [server.authenticate],
 			schema: {
+				tags: ['Events'],
 				response: {
 					200: $ref('getEventResponseSchema'),
 				},
@@ -96,6 +102,7 @@ async function eventRoutes(server: FastifyInstance) {
 		{
 			preHandler: [server.authenticate],
 			schema: {
+				tags: ['Events'],
 				body: $ref('createEventSchema'),
 				response: {
 					200: $ref('getEventResponseSchema'),
@@ -110,6 +117,7 @@ async function eventRoutes(server: FastifyInstance) {
 		{
 			preHandler: [server.authenticate],
 			schema: {
+				tags: ['Events'],
 				response: {
 					204: {},
 				},

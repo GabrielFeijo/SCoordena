@@ -8,6 +8,7 @@ async function scheduleRoutes(server: FastifyInstance) {
 		{
 			preHandler: [server.authenticate],
 			schema: {
+				tags: ['Schedule'],
 				body: $ref('createScheduleItemSchema'),
 				response: {
 					201: $ref('createScheduleItemResponseSchema'),

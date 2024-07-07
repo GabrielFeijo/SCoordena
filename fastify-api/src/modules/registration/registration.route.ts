@@ -8,6 +8,7 @@ async function registrationRoutes(server: FastifyInstance) {
 		{
 			preHandler: [server.authenticate],
 			schema: {
+				tags: ['Registration'],
 				body: $ref('createRegistrationSchema'),
 				response: {
 					201: $ref('createRegistrationResponseSchema'),

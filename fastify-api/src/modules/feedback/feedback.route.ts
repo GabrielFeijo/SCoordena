@@ -8,6 +8,7 @@ async function feedbackRoutes(server: FastifyInstance) {
 		{
 			preHandler: [server.authenticate],
 			schema: {
+				tags: ['Feedback'],
 				body: $ref('createFeedbackSchema'),
 				response: {
 					201: $ref('createFeedbackResponseSchema'),

@@ -14,6 +14,7 @@ import scheduleRoutes from './modules/schedule/schedule.route';
 import { eventSchemas } from './modules/event/event.schema';
 import eventRoutes from './modules/event/event.route';
 import { UserPayload } from '../global';
+import { setupSwagger } from './swagger';
 
 const server = Fastify();
 
@@ -60,6 +61,8 @@ async function main() {
 	]) {
 		server.addSchema(schema);
 	}
+
+	setupSwagger(server);
 
 	server.register(userRoutes, { prefix: 'api/user' });
 	server.register(metricRoutes, { prefix: 'api/metric' });

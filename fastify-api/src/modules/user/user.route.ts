@@ -10,9 +10,10 @@ import { $ref } from './user.schema';
 
 async function userRoutes(server: FastifyInstance) {
 	server.post(
-		'/',
+		'/signup',
 		{
 			schema: {
+				tags: ['Auth'],
 				body: $ref('createUserSchema'),
 				response: {
 					201: $ref('createUserResponseSchema'),
@@ -26,6 +27,7 @@ async function userRoutes(server: FastifyInstance) {
 		'/login',
 		{
 			schema: {
+				tags: ['Auth'],
 				body: $ref('loginSchema'),
 				response: {
 					201: $ref('loginResponseSchema'),
@@ -38,6 +40,9 @@ async function userRoutes(server: FastifyInstance) {
 	server.delete(
 		'/logout',
 		{
+			schema: {
+				tags: ['Auth'],
+			},
 			preHandler: [server.authenticate],
 		},
 		logoutHandler
