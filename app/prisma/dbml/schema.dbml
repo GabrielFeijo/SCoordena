@@ -1,0 +1,128 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table accounts {
+  id String [pk]
+  userId String [not null]
+  type String [not null]
+  provider String [not null]
+  providerAccountId String [not null]
+  refresh_token String
+  access_token String
+  expires_at Int
+  token_type String
+  scope String
+  id_token String
+  session_state String
+  user users [not null]
+
+  indexes {
+    (provider, providerAccountId) [unique]
+  }
+}
+
+Table sessions {
+  id String [pk]
+  sessionToken String [unique, not null]
+  userId String [not null]
+  expires DateTime [not null]
+  user users [not null]
+}
+
+Table users {
+  id String [pk]
+  name String
+  email String [unique]
+  emailVerified DateTime
+  image String
+  accounts accounts [not null]
+  sessions sessions [not null]
+  role Role [not null, default: 'USER']
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  events events [not null]
+  registrations registrations [not null]
+  feedbacks feedbacks [not null]
+}
+
+Table verificationtokens {
+  identifier String [not null]
+  token String [not null]
+  expires DateTime [not null]
+
+  indexes {
+    (identifier, token) [unique]
+  }
+}
+
+Table events {
+  id String [pk]
+  name String [not null]
+  description String
+  image String
+  date DateTime [not null]
+  location String [not null]
+  organizerId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  organizer users [not null]
+  schedule schedules [not null]
+  registrations registrations [not null]
+  feedbacks feedbacks [not null]
+}
+
+Table schedules {
+  id String [pk]
+  eventId String [not null]
+  title String [not null]
+  description String
+  startTime String [not null]
+  endTime String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  event events [not null]
+}
+
+Table registrations {
+  id String [pk]
+  eventId String [not null]
+  userId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  event events [not null]
+  user users [not null]
+}
+
+Table feedbacks {
+  id String [pk]
+  eventId String [not null]
+  userId String [not null]
+  rating Int [not null]
+  comment String
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  event events [not null]
+  user users [not null]
+}
+
+Enum Role {
+  USER
+  ADMIN
+}
+
+Ref: accounts.userId > users.id [delete: Cascade]
+
+Ref: sessions.userId > users.id [delete: Cascade]
+
+Ref: events.organizerId > users.id
+
+Ref: schedules.eventId > events.id [delete: Cascade]
+
+Ref: registrations.eventId > events.id [delete: Cascade]
+
+Ref: registrations.userId > users.id
+
+Ref: feedbacks.eventId > events.id [delete: Cascade]
+
+Ref: feedbacks.userId > users.id

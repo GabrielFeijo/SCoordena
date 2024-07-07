@@ -18,6 +18,10 @@ Para acessar o projeto, clique no link: [SCoordena](https://scoordena.vercel.app
 
 <img src="https://i.imgur.com/wJTgrwG.png" width="1920"/>
 
+## 💾 Diagrama ERD
+
+<img src="https://i.imgur.com/HbURNMR.png" width="1920"/>
+
 ## 🚀 Início
 
 Estas instruções permitirão que você obtenha uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste.
