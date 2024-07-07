@@ -2,7 +2,7 @@ import { db } from '../../utils/prisma';
 import { startOfMonth, subMonths } from 'date-fns';
 
 export async function getEventsPerMonth(defaultYear?: string) {
-	const year = Number(defaultYear);
+	const year = Number(defaultYear) || new Date().getFullYear();
 
 	const data = await db.event.findMany({
 		where: {

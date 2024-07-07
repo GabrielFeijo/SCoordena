@@ -15,7 +15,9 @@ async function metricRoutes(server: FastifyInstance) {
 			preHandler: [server.authenticate],
 			schema: {
 				tags: ['Metrics'],
-				querystring: $ref('getEventsPerMonthSchema'),
+				querystring: {
+					year: { type: 'string' },
+				},
 				response: {
 					200: $ref('getEventsPerMonthResponseSchema'),
 				},
